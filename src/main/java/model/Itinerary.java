@@ -1,17 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package model;
 
 import enums.AirportCode;
-import java.math.BigDecimal;
+
 import java.util.Date;
 
-/**
- *
- * @author pnbdr
- */
 public class Itinerary extends PersistentClass{
     private AirportCode itineraryDeparture;
     private AirportCode itineraryDestination;

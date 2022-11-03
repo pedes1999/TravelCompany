@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
- */
+
 
 package com.travelcompany.eshop;
 
 import enums.AirportCode;
 import enums.CustomerCategory;
 import enums.PaymentMethod;
-import java.math.BigDecimal;
 import java.util.Date;
 import model.Customer;
 import model.Itinerary;
@@ -16,11 +12,6 @@ import model.OrderedTickets;
 import services.TicketService;
 import services.TicketServiceImpl;
 
-
-/**
- *
- * @author pnbdr
- */
 public class Eshop {
 
     public static void main(String[] args) {
@@ -32,7 +23,7 @@ public class Eshop {
         customer.setCustomerAddress("Athens");
         customer.setCustomerEmail("pnbdreamhack@mail.com");
         customer.setCustomerNationality("Greek");
-        customer.setCustomerCategory(CustomerCategory.BUSSINESS);
+        customer.setCustomerCategory(CustomerCategory.BUSINESS);
         
         
         //Itenerary1

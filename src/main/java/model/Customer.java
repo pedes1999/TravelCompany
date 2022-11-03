@@ -1,15 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package model;
 
 import enums.CustomerCategory;
 
-/**
- *
- * @author pnbdr
- */
+
 public class Customer extends PersistentClass{
     private String customerName;
     private String customerEmail;
