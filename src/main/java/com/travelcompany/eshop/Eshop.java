@@ -13,6 +13,8 @@ import java.util.Date;
 import model.Customer;
 import model.Itinerary;
 import model.OrderedTickets;
+import services.TicketService;
+import services.TicketServiceImpl;
 
 
 /**
@@ -41,7 +43,7 @@ public class Eshop {
         Date d = new Date();
         itinerary.setItineraryDepartureDate(d);
         itinerary.setItineraryAirline("Skyline");
-        itinerary.setBasicPrice(BigDecimal.valueOf(350));
+        itinerary.setBasicPrice(500);
         
         
         //OrderedTickets
@@ -52,6 +54,11 @@ public class Eshop {
         ordert.setPaymentMethod(PaymentMethod.CASH);
         //Payment Here
         //ordert.setPaymentAmount();
+        
+        
+        TicketService ticketService = new TicketServiceImpl();
+        System.out.println(ticketService.discount(ordert.getPaymentMethod(), customer.getCustomerCategory(),itinerary.getBasicPrice() ));
+        
         
         System.out.println(itinerary);
         System.out.println("=======================================");

@@ -17,7 +17,7 @@ public class Itinerary extends PersistentClass{
     private AirportCode itineraryDestination;
     private Date itineraryDepartureDate;
     private String itineraryAirline;
-    private BigDecimal basicPrice;
+    private double basicPrice;
 
     public AirportCode getIteneraryDestination() {
         return itineraryDestination;
@@ -51,12 +51,12 @@ public class Itinerary extends PersistentClass{
         this.itineraryAirline = itineraryAirline;
     }
 
-    public BigDecimal getBasicPrice() {
+    public double getBasicPrice() {
         return basicPrice;
     }
 
-    public void setBasicPrice(BigDecimal BasicPrice) {
-        this.basicPrice = BasicPrice;
+    public void setBasicPrice(double basicPrice) {
+        this.basicPrice = basicPrice;
     }
 
     @Override

@@ -4,10 +4,14 @@
  */
 package services;
 
+import enums.CustomerCategory;
+import enums.PaymentMethod;
+import java.math.BigDecimal;
+
 /**
  *
  * @author pnbdr
  */
 public interface TicketService {
-    
+    double discount(PaymentMethod paymentMethod,CustomerCategory customerCategory ,double initialPrice);
 }
