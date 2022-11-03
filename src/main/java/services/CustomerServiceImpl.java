@@ -8,6 +8,6 @@ package services;
  *
  * @author pnbdr
  */
-public class CustomerServiceImpl {
+public class CustomerServiceImpl  implements CustomerService {
     
 }

@@ -8,6 +8,6 @@ package services;
  *
  * @author pnbdr
  */
-public class TicketService {
+public interface TicketService {
     
 }
