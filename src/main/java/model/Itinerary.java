@@ -11,7 +11,22 @@ public class Itinerary extends PersistentClass{
     private Date itineraryDepartureDate;
     private String itineraryAirline;
     private double basicPrice;
+    
+    
+    public Itinerary () {
+    }
+    
+    public Itinerary(int id ,AirportCode itineraryDeparture, AirportCode itineraryDestination, Date itineraryDepartureDate, String itineraryAirline, double basicPrice) {
+        setId(id);
+        this.itineraryDeparture = itineraryDeparture;
+        this.itineraryDestination = itineraryDestination;
+        this.itineraryDepartureDate = itineraryDepartureDate;
+        this.itineraryAirline = itineraryAirline;
+        this.basicPrice = basicPrice;
+    }
 
+    
+    
     public AirportCode getIteneraryDestination() {
         return itineraryDestination;
     }

@@ -1,6 +1,7 @@
 
 package repository;
 
+import java.util.List;
 import model.Customer;
 
 
@@ -10,7 +11,7 @@ public interface CustomerRepository {
     int create(Customer customer);
     
     //Read
-    Customer[] read();
+    List<Customer> read();
     
     //Update
     void update(int customerId,String email);

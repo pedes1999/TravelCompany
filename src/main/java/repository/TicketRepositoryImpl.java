@@ -1,25 +1,24 @@
 
 package repository;
 
-import model.OrderedTickets;
+import java.util.ArrayList;
+import java.util.List;
+import model.Ticket;
 
 
 public class TicketRepositoryImpl implements TicketRepository{
-
+    List<Ticket> ticketList = new ArrayList<>();
     @Override
-    public int create(OrderedTickets ticketId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int create(Ticket ticket) {
+       ticketList.add(ticket);
+       return ticket.getId();
     }
 
     @Override
-    public OrderedTickets read(int customerId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Ticket> read() {
+        return ticketList;
     }
 
-    @Override
-    public OrderedTickets[] read() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
     public void update(int ticketId) {

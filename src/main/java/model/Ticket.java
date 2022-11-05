@@ -2,14 +2,27 @@
 package model;
 
 import enums.PaymentMethod;
-import java.math.BigDecimal;
 
 
-public class OrderedTickets extends PersistentClass{
-    private int iteneraryId;
+public class Ticket extends PersistentClass{
     private int customerId;
+    private int iteneraryId;
     private PaymentMethod paymentMethod;
-    private BigDecimal paymentAmount;
+    private double paymentAmount;
+    
+    public Ticket(){
+        
+    }
+    
+    public Ticket(int id,int iteneraryId, int customerId, PaymentMethod paymentMethod, double paymentAmount) {
+        setId(id);
+        this.customerId = customerId;
+        this.iteneraryId = iteneraryId;
+        this.paymentMethod = paymentMethod;
+        this.paymentAmount = paymentAmount;
+    }
+    
+    
 
     public int getIteneraryId() {
         return iteneraryId;
@@ -35,11 +48,11 @@ public class OrderedTickets extends PersistentClass{
         this.paymentMethod = paymentMethod;
     }
 
-    public BigDecimal getPaymentAmount() {
+    public double getPaymentAmount() {
         return paymentAmount;
     }
 
-    public void setPaymentAmount(BigDecimal paymentAmount) {
+    public void setPaymentAmount(double paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
 

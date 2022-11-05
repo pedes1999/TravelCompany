@@ -11,6 +11,22 @@ public class Customer extends PersistentClass{
     private String customerNationality;
     private CustomerCategory customerCategory;
 
+    public Customer (){
+        
+    }
+    
+    
+    public Customer(int id,String customerName, String customerEmail, String customerAddress, String customerNationality, CustomerCategory customerCategory) {
+        setId(id);
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+        this.customerAddress = customerAddress;
+        this.customerNationality = customerNationality;
+        this.customerCategory = customerCategory;
+    }
+    
+    
+
     public String getCustomerName() {
         return customerName;
     }

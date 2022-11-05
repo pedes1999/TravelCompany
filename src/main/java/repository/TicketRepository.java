@@ -1,17 +1,16 @@
 
 package repository;
 
-import model.OrderedTickets;
+import java.util.List;
+import model.Ticket;
 
 public interface TicketRepository {
     //CRUD
     //Create
-    int create(OrderedTickets ticketId);
-    //Read Single
-    OrderedTickets read( int customerId);
-    
+    int create(Ticket ticket);
+   
     //Read multiple
-    OrderedTickets[] read();
+    List<Ticket> read();
     
     //Update email
     void update(int ticketId);
