@@ -13,7 +13,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     public List<Customer> getFullCustomerList() {
         return customerList;
     }
-
+    //INITIAL POPULATION!!!
     public CustomerRepositoryImpl() {
         customerList.add(new Customer(1, "Maria Iordanous", "miordanou@mail.com", "Athens", "Greek", CustomerCategory.INDIVIDUAL));
         customerList.add(new Customer(2, "Dimitriou Dimitrios", "ddimitriou@mail.com", "Athens", "Greek", CustomerCategory.INDIVIDUAL));

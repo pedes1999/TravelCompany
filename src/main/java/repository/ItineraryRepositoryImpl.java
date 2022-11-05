@@ -14,7 +14,7 @@ public class ItineraryRepositoryImpl implements ItineraryRepository {
     public List<Itinerary> getFullItineraryList() {
         return itineraryList;
     }
-
+     //INITIAL POPULATION!!!
     public ItineraryRepositoryImpl() {
         Date d = new Date();
         int currentDate = d.getDate();
