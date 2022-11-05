@@ -5,7 +5,5 @@ import model.Customer;
 
 public interface CustomerService {
 
-    List<Customer> populateCustomers();
-
-    Customer createCustomerFromConsole();
+    Customer createCustomerFromConsole(List<Customer> customerList);
 }

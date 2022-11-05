@@ -11,7 +11,8 @@ public interface ItineraryRepository {
 
     //Read
     List<Itinerary> read();
-
+    
+    List<Itinerary> getFullItineraryList();
     //Update
     void update(int itineraryId);
 

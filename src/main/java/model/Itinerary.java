@@ -1,22 +1,21 @@
-
 package model;
 
 import enums.AirportCode;
 
 import java.util.Date;
 
-public class Itinerary extends PersistentClass{
+public class Itinerary extends PersistentClass {
+
     private AirportCode itineraryDeparture;
     private AirportCode itineraryDestination;
     private Date itineraryDepartureDate;
     private String itineraryAirline;
     private double basicPrice;
-    
-    
-    public Itinerary () {
+
+    public Itinerary() {
     }
-    
-    public Itinerary(int id ,AirportCode itineraryDeparture, AirportCode itineraryDestination, Date itineraryDepartureDate, String itineraryAirline, double basicPrice) {
+
+    public Itinerary(int id, AirportCode itineraryDeparture, AirportCode itineraryDestination, Date itineraryDepartureDate, String itineraryAirline, double basicPrice) {
         setId(id);
         this.itineraryDeparture = itineraryDeparture;
         this.itineraryDestination = itineraryDestination;
@@ -25,8 +24,6 @@ public class Itinerary extends PersistentClass{
         this.basicPrice = basicPrice;
     }
 
-    
-    
     public AirportCode getIteneraryDestination() {
         return itineraryDestination;
     }
@@ -71,7 +68,5 @@ public class Itinerary extends PersistentClass{
     public String toString() {
         return "Id= " + getId() + ",Departure= " + itineraryDeparture + ", Destination=" + itineraryDestination + ", DepartureDate=" + itineraryDepartureDate + ", Airline=" + itineraryAirline + ", BasicPrice=" + basicPrice;
     }
-    
-    
-    
+
 }

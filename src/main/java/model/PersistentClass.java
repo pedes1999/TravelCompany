@@ -1,8 +1,7 @@
-
 package model;
 
-
 public class PersistentClass {
+
     private int id;
 
     public int getId() {
@@ -12,5 +11,5 @@ public class PersistentClass {
     public void setId(int id) {
         this.id = id;
     }
-    
+
 }

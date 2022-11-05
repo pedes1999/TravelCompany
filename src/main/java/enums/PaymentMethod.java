@@ -1,6 +1,5 @@
-
 package enums;
 
 public enum PaymentMethod {
-    CASH,CREDIT
+    CASH, CREDIT
 }

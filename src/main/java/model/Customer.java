@@ -1,22 +1,20 @@
-
 package model;
 
 import enums.CustomerCategory;
 
+public class Customer extends PersistentClass {
 
-public class Customer extends PersistentClass{
     private String customerName;
     private String customerEmail;
     private String customerAddress;
     private String customerNationality;
     private CustomerCategory customerCategory;
 
-    public Customer (){
-        
+    public Customer() {
+
     }
-    
-    
-    public Customer(int id,String customerName, String customerEmail, String customerAddress, String customerNationality, CustomerCategory customerCategory) {
+
+    public Customer(int id, String customerName, String customerEmail, String customerAddress, String customerNationality, CustomerCategory customerCategory) {
         setId(id);
         this.customerName = customerName;
         this.customerEmail = customerEmail;
@@ -24,8 +22,6 @@ public class Customer extends PersistentClass{
         this.customerNationality = customerNationality;
         this.customerCategory = customerCategory;
     }
-    
-    
 
     public String getCustomerName() {
         return customerName;
@@ -71,7 +67,5 @@ public class Customer extends PersistentClass{
     public String toString() {
         return "Id= " + getId() + ", Name=" + customerName + ", Email=" + customerEmail + ", Address=" + customerAddress + ", Nationality=" + customerNationality + ", Category=" + customerCategory;
     }
-    
-    
-    
+
 }

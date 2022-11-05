@@ -21,23 +21,19 @@ import services.TicketServiceImpl;
 public class Eshop {
 
     public static void main(String[] args) {
+        CustomerService customerService = new CustomerServiceImpl();
+        CustomerRepository customerRepository = new CustomerRepositoryImpl();
 
         ItineraryService itineraryService = new ItineraryServiceImpl();
-        CustomerService customerService = new CustomerServiceImpl();
-        TicketService ticketService = new TicketServiceImpl();
-        CustomerRepository customerRepository = new CustomerRepositoryImpl();
-        TicketRepository ticketRepository = new TicketRepositoryImpl();
         ItineraryRepository itineraryRepository = new ItineraryRepositoryImpl();
 
-        //Initiating collections from Repos
-        List<Customer> customerList = customerRepository.read();
-        List<Itinerary> itineraryList = itineraryRepository.read();
-        List<Ticket> ticketList = ticketRepository.read();
+        TicketService ticketService = new TicketServiceImpl();
+        TicketRepository ticketRepository = new TicketRepositoryImpl();
 
-        //POPULATING THE COLLECTIONS 
-        customerList.addAll(customerService.populateCustomers());
-        itineraryList.addAll(itineraryService.populateItineraries());
-        ticketList.addAll(ticketService.populateTickets());
+        //Initiating collections from Repos
+        List<Customer> customerList = customerRepository.getFullCustomerList();
+        List<Itinerary> itineraryList = itineraryRepository.getFullItineraryList();
+        List<Ticket> ticketList = ticketRepository.getFullTicketList();
 
         boolean isRunning = true;
         do {
@@ -46,9 +42,11 @@ public class Eshop {
             System.out.println("Please Give a number based on your Preference");
             System.out.println("1 : Check The Customer List");
             System.out.println("2 : Check The Itinerary List");
-            System.out.println("3 : Create a new Customer");
-            System.out.println("4 : Create a new Itinerary");
-            System.out.println("5 : Exit");
+            System.out.println("3 : Check The Ticket List");
+            System.out.println("4 : Create a new Customer");
+            System.out.println("5 : Create a new Itinerary");
+            System.out.println("6 : Create a new Ticket");
+            System.out.println("7 : Exit");
 
             System.out.println("===============================================");
 
@@ -65,21 +63,28 @@ public class Eshop {
                     System.out.println(i);
                 }
             }
-
             if (choice.equals(3)) {
-                Customer newCustomer = customerService.createCustomerFromConsole();
-                customerRepository.create(newCustomer);
-
-                System.out.println("Customer was created Successfully!!");
-
+                for (Ticket t : ticketList) {
+                    System.out.println(t);
+                }
             }
-
             if (choice.equals(4)) {
-                Itinerary newItinerary = itineraryService.createItineraryFromConsole();
+                Customer newCustomer = customerService.createCustomerFromConsole(customerList);
+                customerRepository.create(newCustomer);
+                System.out.println("Customer was created Successfully!!");
+            }
+            if (choice.equals(5)) {
+                Itinerary newItinerary = itineraryService.createItineraryFromConsole(itineraryList);
                 itineraryRepository.create(newItinerary);
                 System.out.println("Itinerary was Created Successfully!!");
             }
-            if (choice.equals(5)) {
+            if (choice.equals(6)) {
+                Ticket newTicket = ticketService.createTicketFromConsole(customerList, itineraryList, ticketList);
+                ticketRepository.create(newTicket);
+                System.out.println("Ticket was Created Successfully!!");
+
+            }
+            if (choice.equals(7)) {
                 isRunning = false;
             }
 

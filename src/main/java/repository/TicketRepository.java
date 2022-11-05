@@ -12,6 +12,7 @@ public interface TicketRepository {
     //Read multiple
     List<Ticket> read();
     
+    List<Ticket> getFullTicketList();
     //Update email
     void update(int ticketId);
     

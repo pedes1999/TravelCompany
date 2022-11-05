@@ -7,7 +7,21 @@ import model.Customer;
 
 public class CustomerRepositoryImpl implements CustomerRepository {
 
-    List<Customer> customerList = new ArrayList<>();
+    private List<Customer> customerList = new ArrayList<>();
+
+    @Override
+    public List<Customer> getFullCustomerList() {
+        return customerList;
+    }
+
+    public CustomerRepositoryImpl() {
+        customerList.add(new Customer(1, "Maria Iordanous", "miordanou@mail.com", "Athens", "Greek", CustomerCategory.INDIVIDUAL));
+        customerList.add(new Customer(2, "Dimitriou Dimitrios", "ddimitriou@mail.com", "Athens", "Greek", CustomerCategory.INDIVIDUAL));
+        customerList.add(new Customer(3, "Ioannis Ioannou", "iioannou@mail.com", "Athens", "Greek", CustomerCategory.BUSINESS));
+        customerList.add(new Customer(4, "Antonio Molinari", "amolinari@mail.com", "Milan", "Italian", CustomerCategory.INDIVIDUAL));
+        customerList.add(new Customer(5, "Frederico Rossi", "frossi@mail.com", "Milan", "Italian", CustomerCategory.INDIVIDUAL));
+        customerList.add(new Customer(6, "Mario Conti", "mconti@mail.com", "Rome", "Italian", CustomerCategory.BUSINESS));
+    }
 
     @Override
     public int create(Customer customer) {

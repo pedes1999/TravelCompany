@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package services;
 
 import enums.AirportCode;
@@ -9,38 +5,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import model.Itinerary;
-import repository.ItineraryRepository;
-import repository.ItineraryRepositoryImpl;
 
-/**
- *
- * @author pnbdr
- */
 public class ItineraryServiceImpl implements ItineraryService {
 
-    ItineraryRepository itineraryRepository = new ItineraryRepositoryImpl();
-    List<Itinerary> itineraryList = itineraryRepository.read();
-
     @Override
-    public List<Itinerary> populateItineraries() {
-        Date d = new Date();
-        int currentDate = d.getDate();
-        int currentMonth = d.getMonth();
-        int currentYear = d.getYear();
-        itineraryRepository.create(new Itinerary(1, AirportCode.ATH, AirportCode.PAR, new Date(currentYear, currentMonth, currentDate, 13, 35), "Skylines", 300));
-        itineraryRepository.create(new Itinerary(2, AirportCode.ATH, AirportCode.LON, new Date(currentYear, currentMonth, currentDate, 13, 40), "Skylines", 420));
-        itineraryRepository.create(new Itinerary(3, AirportCode.ATH, AirportCode.AMS, new Date(currentYear, currentMonth, currentDate, 13, 45), "Skylines", 280));
-        itineraryRepository.create(new Itinerary(4, AirportCode.ATH, AirportCode.PAR, new Date(currentYear, currentMonth, currentDate, 14, 20), "Skylines", 310));
-        itineraryRepository.create(new Itinerary(5, AirportCode.ATH, AirportCode.DUB, new Date(currentYear, currentMonth, currentDate, 14, 35), "Skylines", 880));
-        itineraryRepository.create(new Itinerary(6, AirportCode.ATH, AirportCode.FRA, new Date(currentYear, currentMonth, currentDate, 14, 55), "Skylines", 380));
-        itineraryRepository.create(new Itinerary(7, AirportCode.ATH, AirportCode.FRA, new Date(currentYear, currentMonth, currentDate, 15, 35), "Skylines", 350));
-        itineraryRepository.create(new Itinerary(8, AirportCode.ATH, AirportCode.MEX, new Date(currentYear, currentMonth, currentDate, 16, 00), "Skylines", 1020));
-        itineraryRepository.create(new Itinerary(9, AirportCode.ATH, AirportCode.DUB, new Date(currentYear, currentMonth, currentDate, 16, 35), "Skylines", 770));
-        return itineraryList;
-    }
-
-    @Override
-    public Itinerary createItineraryFromConsole() {
+    public Itinerary createItineraryFromConsole(List<Itinerary> itineraryList) {
         Scanner sc = new Scanner(System.in);
         int itineraryLastId = itineraryList.size();
         System.out.println(itineraryLastId);
@@ -63,28 +32,30 @@ public class ItineraryServiceImpl implements ItineraryService {
             System.out.println("5 : FRA");
             System.out.println("6 : MEX");
             Integer choiceCategory = sc.nextInt();
-             if (choiceCategory.equals(1)) {
+            if (choiceCategory.equals(1)) {
                 newItinerary.setItineraryDestination(AirportCode.PAR);
                 break;
             } else if (choiceCategory.equals(2)) {
-               newItinerary.setItineraryDestination(AirportCode.LON);
+                newItinerary.setItineraryDestination(AirportCode.LON);
                 break;
             } else if (choiceCategory.equals(3)) {
-               newItinerary.setItineraryDestination(AirportCode.AMS);
+                newItinerary.setItineraryDestination(AirportCode.AMS);
                 break;
             } else if (choiceCategory.equals(4)) {
-               newItinerary.setItineraryDestination(AirportCode.DUB);
+                newItinerary.setItineraryDestination(AirportCode.DUB);
                 break;
             } else if (choiceCategory.equals(5)) {
-               newItinerary.setItineraryDestination(AirportCode.FRA);
+                newItinerary.setItineraryDestination(AirportCode.FRA);
                 break;
-            } else if (choiceCategory.equals(4)) {
-               newItinerary.setItineraryDestination(AirportCode.MEX);
+            } else if (choiceCategory.equals(6)) {
+                newItinerary.setItineraryDestination(AirportCode.MEX);
                 break;
+
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!     EXCEPTION FOR NO AIRPORT CODE SHOULD BE IMPLEMENTED HERE  !!!!!!!!!!!!!!!!!!!!!!!
             } else {
-                 System.out.println("Please enter a valid Destination Airport Code");
+                System.out.println("Please enter a valid Destination Airport Code");
             }
-            
+
         }
         //Set Itinerary's Base Price
         System.out.println("Please state Itinerary's Basic Price : ");
