@@ -8,6 +8,14 @@ import model.Ticket;
 
 public class TicketRepositoryImpl implements TicketRepository{
     List<Ticket> ticketList = new ArrayList<>();
+    
+    
+    public void populateCustomers(){
+        
+    }
+    
+    
+    
     @Override
     public int create(Ticket ticket) {
        ticketList.add(ticket);
