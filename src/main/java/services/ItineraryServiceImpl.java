@@ -56,27 +56,35 @@ public class ItineraryServiceImpl implements ItineraryService {
         //Set Destination Code
         while (true) {
             System.out.println("Please State Itinerary's Destination Airport Code : ");
-            System.out.println("Available Codes Are : PAR , LON , AMS , DUB , FRA , MEX ");
-            String destination = sc.next();
-            switch (destination) {
-                case "PAR" ->
-                    newItinerary.setItineraryDestination(AirportCode.PAR);
-                    
-                case "LON" ->
-                    newItinerary.setItineraryDestination(AirportCode.LON);
-
-                case "AMS" ->
-                    newItinerary.setItineraryDestination(AirportCode.AMS);
-                case "DUB" ->
-                    newItinerary.setItineraryDestination(AirportCode.DUB);
-                case "FRA" ->
-                    newItinerary.setItineraryDestination(AirportCode.FRA);
-                case "MEX" ->
-                    newItinerary.setItineraryDestination(AirportCode.MEX);
-                default -> 
-                    newItinerary.setItineraryDestination(AirportCode.PAR);
-                
-            } break;
+            System.out.println("1 : PAR");
+            System.out.println("2 : LON");
+            System.out.println("3 : AMS");
+            System.out.println("4 : DUB");
+            System.out.println("5 : FRA");
+            System.out.println("6 : MEX");
+            Integer choiceCategory = sc.nextInt();
+             if (choiceCategory.equals(1)) {
+                newItinerary.setItineraryDestination(AirportCode.PAR);
+                break;
+            } else if (choiceCategory.equals(2)) {
+               newItinerary.setItineraryDestination(AirportCode.LON);
+                break;
+            } else if (choiceCategory.equals(3)) {
+               newItinerary.setItineraryDestination(AirportCode.AMS);
+                break;
+            } else if (choiceCategory.equals(4)) {
+               newItinerary.setItineraryDestination(AirportCode.DUB);
+                break;
+            } else if (choiceCategory.equals(5)) {
+               newItinerary.setItineraryDestination(AirportCode.FRA);
+                break;
+            } else if (choiceCategory.equals(4)) {
+               newItinerary.setItineraryDestination(AirportCode.MEX);
+                break;
+            } else {
+                 System.out.println("Please enter a valid Destination Airport Code");
+            }
+            
         }
         //Set Itinerary's Base Price
         System.out.println("Please state Itinerary's Basic Price : ");
@@ -95,7 +103,6 @@ public class ItineraryServiceImpl implements ItineraryService {
 
         newItinerary.setItineraryDepartureDate(new Date(year, month, day, hour, minute));
 
-      
         return newItinerary;
     }
 

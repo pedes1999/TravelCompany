@@ -1,9 +1,5 @@
 package com.travelcompany.eshop;
 
-import enums.AirportCode;
-import enums.CustomerCategory;
-import enums.PaymentMethod;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import model.Customer;
@@ -59,7 +55,6 @@ public class Eshop {
             Scanner sc = new Scanner(System.in);
             Integer choice = sc.nextInt();
 
-//            //TO BE IMPLEMENTED IN A SEPARATE METHOD
             if (choice.equals(1)) {
                 for (Customer c : customerList) {
                     System.out.println(c);
@@ -74,12 +69,12 @@ public class Eshop {
             if (choice.equals(3)) {
                 Customer newCustomer = customerService.createCustomerFromConsole();
                 customerRepository.create(newCustomer);
-                
+
                 System.out.println("Customer was created Successfully!!");
 
             }
-            
-            if (choice.equals(4)){
+
+            if (choice.equals(4)) {
                 Itinerary newItinerary = itineraryService.createItineraryFromConsole();
                 itineraryRepository.create(newItinerary);
                 System.out.println("Itinerary was Created Successfully!!");
