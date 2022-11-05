@@ -88,13 +88,20 @@ public class TicketServiceImpl implements TicketService {
         newTicket.setPaymentAmount(discount(newTicket.getPaymentMethod(), selectedCustomer.getCustomerCategory(), selectedItinerary.getBasicPrice()));
 
         return newTicket;
+    }
 
-//                Integer check = ticketRepository.create(newTicket);
-//                if (check.equals(newTicket.getId())) {
-//                    System.out.println("The ticket was created successfully");
-//                } else {
-//                    System.out.println("Something went wrong");
-//                }
+    @Override
+    public List<Ticket> populateTicketData(List<Customer> customerList, List<Itinerary> itineraryList, List<Ticket> ticketList) {
+        ticketList.add(new Ticket(1, itineraryList.get(1).getId(), customerList.get(0).getId(), PaymentMethod.CASH, discount(PaymentMethod.CASH, customerList.get(0).getCustomerCategory(), itineraryList.get(1).getBasicPrice())));
+        ticketList.add(new Ticket(2, itineraryList.get(2).getId(), customerList.get(1).getId(), PaymentMethod.CASH, discount(PaymentMethod.CASH, customerList.get(1).getCustomerCategory(), itineraryList.get(2).getBasicPrice())));
+        ticketList.add(new Ticket(3, itineraryList.get(2).getId(), customerList.get(2).getId(), PaymentMethod.CREDIT, discount(PaymentMethod.CREDIT, customerList.get(2).getCustomerCategory(), itineraryList.get(2).getBasicPrice())));
+        ticketList.add(new Ticket(4, itineraryList.get(3).getId(), customerList.get(1).getId(), PaymentMethod.CREDIT, discount(PaymentMethod.CREDIT, customerList.get(1).getCustomerCategory(), itineraryList.get(3).getBasicPrice())));
+        ticketList.add(new Ticket(5, itineraryList.get(3).getId(), customerList.get(2).getId(), PaymentMethod.CASH, discount(PaymentMethod.CASH, customerList.get(2).getCustomerCategory(), itineraryList.get(3).getBasicPrice())));
+        ticketList.add(new Ticket(6, itineraryList.get(6).getId(), customerList.get(3).getId(), PaymentMethod.CREDIT, discount(PaymentMethod.CREDIT, customerList.get(3).getCustomerCategory(), itineraryList.get(6).getBasicPrice())));
+        ticketList.add(new Ticket(7, itineraryList.get(6).getId(), customerList.get(4).getId(), PaymentMethod.CREDIT, discount(PaymentMethod.CREDIT, customerList.get(4).getCustomerCategory(), itineraryList.get(6).getBasicPrice())));
+        ticketList.add(new Ticket(8, itineraryList.get(8).getId(), customerList.get(1).getId(), PaymentMethod.CASH, discount(PaymentMethod.CASH, customerList.get(1).getCustomerCategory(), itineraryList.get(8).getBasicPrice())));
+        ticketList.add(new Ticket(9, itineraryList.get(2).getId(), customerList.get(0).getId(), PaymentMethod.CASH, discount(PaymentMethod.CASH, customerList.get(0).getCustomerCategory(), itineraryList.get(3).getBasicPrice())));
+        return ticketList;
     }
 
 }

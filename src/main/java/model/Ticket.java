@@ -13,7 +13,7 @@ public class Ticket extends PersistentClass {
 
     }
 
-    public Ticket(int id, int iteneraryId, int customerId, PaymentMethod paymentMethod, double paymentAmount) {
+    public Ticket(int id, int itineraryId, int customerId, PaymentMethod paymentMethod, double paymentAmount) {
         setId(id);
         this.customerId = customerId;
         this.itineraryId = itineraryId;

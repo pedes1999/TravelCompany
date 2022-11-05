@@ -24,11 +24,11 @@ public class Eshop {
         //Initiating Customer Services and Repos
         CustomerService customerService = new CustomerServiceImpl();
         CustomerRepository customerRepository = new CustomerRepositoryImpl();
-        
+
         //Initiating Itinerary Services and Repos
         ItineraryService itineraryService = new ItineraryServiceImpl();
         ItineraryRepository itineraryRepository = new ItineraryRepositoryImpl();
-        
+
         //Initiating Ticket Services and Repos
         TicketService ticketService = new TicketServiceImpl();
         TicketRepository ticketRepository = new TicketRepositoryImpl();
@@ -37,11 +37,11 @@ public class Eshop {
         List<Customer> customerList = customerRepository.getFullCustomerList();
         List<Itinerary> itineraryList = itineraryRepository.getFullItineraryList();
         List<Ticket> ticketList = ticketRepository.getFullTicketList();
-        
-        
+
+        //Initial Population Of the ticketList
+        ticketList = ticketService.populateTicketData(customerList, itineraryList, ticketList);
+
         // !!!!! GUI IMPLEMENTATION !!!!!!
-        
-        
         boolean isRunning = true; // boolean to control the while condition to terminate Program!
         do {
 
@@ -55,19 +55,20 @@ public class Eshop {
             System.out.println("5 : Create a new Itinerary");
             System.out.println("6 : Create a new Ticket");
             System.out.println("7 : Exit");
-
             System.out.println("===============================================");
-            
+
             //Get Input By User
             Scanner sc = new Scanner(System.in);
             Integer choice = sc.nextInt();
-            
+
             //Print Customer List
             if (choice.equals(1)) {
                 for (Customer c : customerList) {
                     System.out.println(c);
                 }
+
             }
+
             //Print Itinerary List
             if (choice.equals(2)) {
                 for (Itinerary i : itineraryList) {
@@ -99,7 +100,7 @@ public class Eshop {
                 System.out.println("Ticket was Created Successfully!!");
 
             }
-            //Exit the program
+            //Exit the programm
             if (choice.equals(7)) {
                 isRunning = false;
             }
