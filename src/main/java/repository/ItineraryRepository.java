@@ -1,5 +1,6 @@
 package repository;
 
+import enums.AirportCode;
 import java.util.List;
 import model.Itinerary;
 
@@ -11,7 +12,10 @@ public interface ItineraryRepository {
     //CREATE A NEW ITINERARY
     int create(Itinerary itinerary);
 
-    //Read
-    List<Itinerary> read();
+    //READ BASED ON DEPARTURE
+    List<Itinerary> readDeparture(AirportCode airportCode,List<Itinerary> itineraryList);
+    
+    //READ BASED ON DESTINATION
+    List<Itinerary> readDestination(AirportCode airportCode,List<Itinerary> itineraryList);
 
 }

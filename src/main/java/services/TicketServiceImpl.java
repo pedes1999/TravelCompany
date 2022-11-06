@@ -88,9 +88,14 @@ public class TicketServiceImpl implements TicketService {
         System.out.println(newTicket.getPaymentMethod());
         System.out.println(selectedCustomer.getCustomerCategory());
         System.out.println(selectedItinerary.getBasicPrice());
-        newTicket.setPaymentAmount(discount(newTicket.getPaymentMethod(), selectedCustomer.getCustomerCategory(), selectedItinerary.getBasicPrice()));
-
+        double ticketPrice = discount(newTicket.getPaymentMethod(), selectedCustomer.getCustomerCategory(), selectedItinerary.getBasicPrice());
+        newTicket.setPaymentAmount(ticketPrice);
+        //SET CUSTOMER SPENT
+        double initialCustomerSpent = selectedCustomer.getCustomerSpent();
+        selectedCustomer.setCustomerSpent(initialCustomerSpent + ticketPrice);
         return newTicket;
+        
+        
     }
 
 }
