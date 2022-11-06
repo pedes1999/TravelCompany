@@ -21,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
         String name = sc.next();
         newCustomer.setCustomerName(name);
 
-        //Set Customer's Email
+        //Set Customer's Email and check for its validity
         System.out.println("Please state Customer's Email : ");
         String email = sc.next();
         newCustomer.setCustomerEmail(email);

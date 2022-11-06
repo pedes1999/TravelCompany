@@ -10,11 +10,9 @@ public class ItineraryRepositoryImpl implements ItineraryRepository {
 
     private List<Itinerary> itineraryList = new ArrayList<>();
 
-    @Override
-    public List<Itinerary> getFullItineraryList() {
-        return itineraryList;
-    }
-     //INITIAL POPULATION!!!
+   
+    //INITIAL POPULATION!!!
+
     public ItineraryRepositoryImpl() {
         Date d = new Date();
         int currentDate = d.getDate();
@@ -30,26 +28,24 @@ public class ItineraryRepositoryImpl implements ItineraryRepository {
         itineraryList.add(new Itinerary(8, AirportCode.ATH, AirportCode.MEX, new Date(currentYear, currentMonth, currentDate, 16, 00), "Skylines", 1020));
         itineraryList.add(new Itinerary(9, AirportCode.ATH, AirportCode.DUB, new Date(currentYear, currentMonth, currentDate, 16, 35), "Skylines", 770));
     }
+    
+     //GETTER FOR ITINERARY LIST
+    @Override
+    public List<Itinerary> getItineraryList() {
+        return itineraryList;
+    }
 
+    //CREATE A NEW ITINERARY
     @Override
     public int create(Itinerary itinerary) {
         itineraryList.add(itinerary);
         return itinerary.getId();
     }
 
+    //READ
     @Override
     public List<Itinerary> read() {
         return itineraryList;
-    }
-
-    @Override
-    public void update(int itineraryId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public boolean delete(int itineraryId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

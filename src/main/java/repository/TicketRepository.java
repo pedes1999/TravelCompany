@@ -2,20 +2,20 @@
 package repository;
 
 import java.util.List;
+import model.Customer;
+import model.Itinerary;
 import model.Ticket;
 
 public interface TicketRepository {
-    //CRUD
-    //Create
+    
+    //CREATE A NEW TICKET
     int create(Ticket ticket);
-   
-    //Read multiple
+    
+    //INITIAL POPULATION OF TICKET LIST
+    List<Ticket> populateTicketList(List<Customer> customerList,List<Itinerary> itineraryList);
+    
+    //Read 
     List<Ticket> read();
     
-    List<Ticket> getFullTicketList();
-    //Update email
-    void update(int ticketId);
-    
-   //Delete
-    boolean delete(int ticketId);
+ 
 }

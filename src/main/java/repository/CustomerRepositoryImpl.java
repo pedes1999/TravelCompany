@@ -9,10 +9,6 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     private List<Customer> customerList = new ArrayList<>();
 
-    @Override
-    public List<Customer> getFullCustomerList() {
-        return customerList;
-    }
     //INITIAL POPULATION!!!
     public CustomerRepositoryImpl() {
         customerList.add(new Customer(1, "Maria Iordanous", "miordanou@mail.com", "Athens", "Greek", CustomerCategory.INDIVIDUAL));
@@ -26,6 +22,13 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         customerList.add(new Customer(9, "Frederic Michel", "fmichel@mail.com", "Athens", "French", CustomerCategory.INDIVIDUAL));
     }
 
+    //GETTER FOR CUSTOMER LIST
+    @Override
+    public List<Customer> getCustomerList() {
+        return customerList;
+    }
+
+    //CREATE A NEW CUSTOMER
     @Override
     public int create(Customer customer) {
 
@@ -34,20 +37,10 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     }
 
+    //READ
     @Override
     public List<Customer> read() {
         return customerList;
-
-    }
-
-    @Override
-    public void update(int customerId, String email) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public boolean delete(int customerId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

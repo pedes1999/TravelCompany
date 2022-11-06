@@ -5,18 +5,13 @@ import model.Customer;
 
 public interface CustomerRepository {
 
-    //CRUD
-    //Create
+    //CREATE A NEW CUSTOMER
     int create(Customer customer);
-
+    
+    //GETTER FOR CUSTOMER LIST
+    List<Customer> getCustomerList();
+    
     //Read
     List<Customer> read();
 
-    List<Customer> getFullCustomerList();
-
-    //Update
-    void update(int customerId, String email);
-
-    //Delete
-    boolean delete(int customerId);
 }
