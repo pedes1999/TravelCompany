@@ -9,8 +9,7 @@ import model.Itinerary;
 import model.Ticket;
 
 public class TicketServiceImpl implements TicketService {
-    
-    
+
     //DISCOUNT METHOD
     @Override
     public double discount(PaymentMethod paymentMethod, CustomerCategory customerCategory, double initialPrice) {
@@ -24,22 +23,22 @@ public class TicketServiceImpl implements TicketService {
 
         if (customerCategory.equals(CustomerCategory.INDIVIDUAL)) {
             if (paymentMethod == PaymentMethod.CASH) {
-                return initialPrice - (0.2 * initialPrice);
+                return initialPrice + (0.2 * initialPrice);
             } else if (paymentMethod == PaymentMethod.CREDIT) {
-                return initialPrice - (0.3 * initialPrice);
+                return initialPrice + (0.1 * initialPrice);
             }
         }
 
         return 0;
     }
-    
+
     //CREATE TICKET FROM CONSOLE
     @Override
     public Ticket createTicketFromConsole(List<Customer> customerList, List<Itinerary> itineraryList, List<Ticket> ticketList) {
         Scanner sc = new Scanner(System.in);
         int ticketLastId = ticketList.size();
         Ticket newTicket = new Ticket();
-        
+
         //Set ticket Id incrementing by one
         newTicket.setId(ticketLastId + 1);
 
@@ -93,9 +92,11 @@ public class TicketServiceImpl implements TicketService {
         //SET CUSTOMER SPENT
         double initialCustomerSpent = selectedCustomer.getCustomerSpent();
         selectedCustomer.setCustomerSpent(initialCustomerSpent + ticketPrice);
+        //SET TICKETS PURCHASED
+        int ticketsPurchased = selectedCustomer.getTicketsPurchased();
+        selectedCustomer.setTicketsPurchased(ticketsPurchased + 1);
         return newTicket;
-        
-        
+
     }
 
 }

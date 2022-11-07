@@ -12,12 +12,13 @@ public class Customer extends PersistentClass implements Comparable<Customer> {
 
     //TEST
     private double customerSpent;
+    private int ticketsPurchased;
 
     public Customer() {
 
     }
 
-    //OVERLOAD CONSTRUCTORS FOR MONEY SPENT
+    //OVERLOAD CONSTRUCTORS FOR TicketsPurchased
     public Customer(int id, String customerName, String customerEmail, String customerAddress, String customerNationality, CustomerCategory customerCategory) {
         setId(id);
         this.customerName = customerName;
@@ -27,14 +28,14 @@ public class Customer extends PersistentClass implements Comparable<Customer> {
         this.customerCategory = customerCategory;
     }
 
-    public Customer(int id, String customerName, String customerEmail, String customerAddress, String customerNationality, CustomerCategory customerCategory, double customerSpent) {
+    public Customer(int id, String customerName, String customerEmail, String customerAddress, String customerNationality, CustomerCategory customerCategory, int ticketsPurchased) {
         setId(id);
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.customerAddress = customerAddress;
         this.customerNationality = customerNationality;
         this.customerCategory = customerCategory;
-        this.customerSpent = customerSpent;
+        this.ticketsPurchased = ticketsPurchased;
     }
 
     public String getCustomerName() {
@@ -86,9 +87,25 @@ public class Customer extends PersistentClass implements Comparable<Customer> {
         this.customerSpent = customerSpent;
     }
 
+    public int getTicketsPurchased() {
+        return ticketsPurchased;
+    }
+
+    public void setTicketsPurchased(int ticketsPurchased) {
+        this.ticketsPurchased = ticketsPurchased;
+    }
+
     @Override
     public String toString() {
-        return "Id= " + getId() + ", Name=" + customerName + ", Email=" + customerEmail + ", Address=" + customerAddress + ", Nationality=" + customerNationality + ", Category=" + customerCategory + ", Money Spent=" + customerSpent;
+        return "Id= " + getId() + ", Name=" + customerName + ", Email=" + customerEmail + ", Address=" + customerAddress + ", Nationality=" + customerNationality + ", Category=" + customerCategory;
+    }
+
+    public String toStringTicket() {
+        return "Id= " + getId() + ", Name=" + customerName + ", Email=" + customerEmail + ", Address=" + customerAddress + ", Nationality=" + customerNationality + ", Category=" + customerCategory + ", Tickets=" + ticketsPurchased;
+    }
+
+    public String toStringCost() {
+        return "Id= " + getId() + ", Name=" + customerName + ", Email=" + customerEmail + ", Address=" + customerAddress + ", Nationality=" + customerNationality + ", Category=" + customerCategory + ", Spent=" + customerSpent;
     }
 
     @Override

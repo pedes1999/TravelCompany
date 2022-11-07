@@ -37,23 +37,24 @@ public class CustomerServiceImpl implements CustomerService {
         String nationality = sc.next();
         newCustomer.setCustomerNationality(nationality);
 
-        //Set Customer's Category
+        OUTER:
         while (true) {
             System.out.println("Please state Customer's Category : ");
             System.out.println("The Choices are : ");
             System.out.println("1 : Individual");
             System.out.println("2 : Bussiness");
             Integer choiceCategory = sc.nextInt();
-            if (choiceCategory.equals(1)) {
-                newCustomer.setCustomerCategory(CustomerCategory.INDIVIDUAL);
-                break;
-            } else if (choiceCategory.equals(2)) {
-                newCustomer.setCustomerCategory(CustomerCategory.BUSINESS);
-                break;
-            } else {
-                System.out.println("That is not Valid. Please try again!!!!");
+            switch (choiceCategory) {
+                case 1:
+                    newCustomer.setCustomerCategory(CustomerCategory.INDIVIDUAL);
+                    break OUTER;
+                case 2:
+                    newCustomer.setCustomerCategory(CustomerCategory.BUSINESS);
+                    break OUTER;
+                default:
+                    System.out.println("That is not Valid. Please try again!!!!");
+                    break;
             }
-
         }
 
         return newCustomer;

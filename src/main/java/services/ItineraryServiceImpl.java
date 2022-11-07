@@ -1,7 +1,6 @@
 package services;
 
 import enums.AirportCode;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -132,8 +131,8 @@ public class ItineraryServiceImpl implements ItineraryService {
         System.out.println("===============================================");
         Scanner sc = new Scanner(System.in);
         Integer itineraryChoice = sc.nextInt();
-        
-        if(itineraryChoice.equals(1)){
+
+        if (itineraryChoice.equals(1)) {
             while (true) {
                 System.out.println("Please State Itinerary's Departure Airport Code : ");
                 System.out.println("1 : PAR");
@@ -146,33 +145,33 @@ public class ItineraryServiceImpl implements ItineraryService {
                 Integer choiceDeparture = sc.nextInt();
                 switch (choiceDeparture) {
                     case 1 -> {
-                        return itineraryRepository.readDeparture(AirportCode.PAR,itineraryList);
+                        return itineraryRepository.readDeparture(AirportCode.PAR, itineraryList);
                     }
                     case 2 -> {
-                        return itineraryRepository.readDeparture(AirportCode.LON,itineraryList);
+                        return itineraryRepository.readDeparture(AirportCode.LON, itineraryList);
                     }
                     case 3 -> {
-                        return itineraryRepository.readDeparture(AirportCode.AMS,itineraryList);
+                        return itineraryRepository.readDeparture(AirportCode.AMS, itineraryList);
                     }
                     case 4 -> {
-                        return itineraryRepository.readDeparture(AirportCode.DUB,itineraryList);
+                        return itineraryRepository.readDeparture(AirportCode.DUB, itineraryList);
                     }
                     case 5 -> {
-                        return itineraryRepository.readDeparture(AirportCode.FRA,itineraryList);
+                        return itineraryRepository.readDeparture(AirportCode.FRA, itineraryList);
                     }
                     case 6 -> {
-                        return itineraryRepository.readDeparture(AirportCode.MEX,itineraryList);
+                        return itineraryRepository.readDeparture(AirportCode.MEX, itineraryList);
                     }
                     case 7 -> {
-                        return itineraryRepository.readDeparture(AirportCode.ATH,itineraryList);
+                        return itineraryRepository.readDeparture(AirportCode.ATH, itineraryList);
                     }
-                    default -> System.out.println("Please enter a valid Departure Airport Code");
+                    default ->
+                        System.out.println("Please enter a valid Departure Airport Code");
                 }
 
             }
-        } 
-         else if(itineraryChoice.equals(2)){
-              while (true) {
+        } else if (itineraryChoice.equals(2)) {
+            while (true) {
                 System.out.println("Please State Itinerary's Destination Airport Code : ");
                 System.out.println("1 : PAR");
                 System.out.println("2 : LON");
@@ -182,33 +181,34 @@ public class ItineraryServiceImpl implements ItineraryService {
                 System.out.println("6 : MEX");
                 System.out.println("7 : ATH");
                 Integer choiceDestination = sc.nextInt();
-                  switch (choiceDestination) {
-                      case 1 -> {
-                          return itineraryRepository.readDestination(AirportCode.PAR,itineraryList);
-                      }
-                      case 2 -> {
-                          return itineraryRepository.readDestination(AirportCode.LON,itineraryList);
-                      }
-                      case 3 -> {
-                          return itineraryRepository.readDestination(AirportCode.AMS,itineraryList);
-                      }
-                      case 4 -> {
-                          return itineraryRepository.readDestination(AirportCode.DUB,itineraryList);
-                      }
-                      case 5 -> {
-                          return itineraryRepository.readDestination(AirportCode.FRA,itineraryList);
-                      }
-                      case 6 -> {
-                          return itineraryRepository.readDestination(AirportCode.MEX,itineraryList);
-                      }
-                      case 7 -> {
-                          return itineraryRepository.readDestination(AirportCode.ATH,itineraryList);
-                      }
-                      default -> System.out.println("Please enter a valid Destination Airport Code");
-                  }
+                switch (choiceDestination) {
+                    case 1 -> {
+                        return itineraryRepository.readDestination(AirportCode.PAR, itineraryList);
+                    }
+                    case 2 -> {
+                        return itineraryRepository.readDestination(AirportCode.LON, itineraryList);
+                    }
+                    case 3 -> {
+                        return itineraryRepository.readDestination(AirportCode.AMS, itineraryList);
+                    }
+                    case 4 -> {
+                        return itineraryRepository.readDestination(AirportCode.DUB, itineraryList);
+                    }
+                    case 5 -> {
+                        return itineraryRepository.readDestination(AirportCode.FRA, itineraryList);
+                    }
+                    case 6 -> {
+                        return itineraryRepository.readDestination(AirportCode.MEX, itineraryList);
+                    }
+                    case 7 -> {
+                        return itineraryRepository.readDestination(AirportCode.ATH, itineraryList);
+                    }
+                    default ->
+                        System.out.println("Please enter a valid Destination Airport Code");
+                }
 
             }
         }
         return null;
-}
+    }
 }
