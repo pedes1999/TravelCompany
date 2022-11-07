@@ -4,16 +4,11 @@ import java.util.List;
 import model.Customer;
 import model.Ticket;
 
-public interface CustomerRepository {
+public interface CustomerRepository extends Repository<Customer> {
 
-    void populateCustomerPrice(List<Customer> customerList, List<Ticket> ticketList);
-
-    //CREATE A NEW CUSTOMER
-    int create(Customer customer);
-
-    //GETTER FOR CUSTOMER LIST
-    List<Customer> getCustomerList();
-
+    //Update User's email
+    void update(int customerId, String email);
+    
     //search customers who didnt buy any tickets
     List<Customer> searchIfNotBuy(List<Customer> customerList, List<Ticket> ticketList);
 
