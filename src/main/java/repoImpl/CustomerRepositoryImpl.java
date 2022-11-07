@@ -10,8 +10,6 @@ import repository.CustomerRepository;
 
 public class CustomerRepositoryImpl extends RepositoryImpl<Customer> implements CustomerRepository {
 
-
-
     //SEARCH FOR CUSTOMERS THAT HAVENT BOUGHT TICKETS
     @Override
     public List<Customer> searchIfNotBuy(List<Customer> customerList, List<Ticket> ticketList) {
@@ -48,11 +46,12 @@ public class CustomerRepositoryImpl extends RepositoryImpl<Customer> implements 
         List<Customer> listWithMostTickets = new ArrayList<>(setWithMostTickets);
         return listWithMostTickets;
     }
+
     //UPDATE USER'S EMAIL
-     @Override
+    @Override
     public void update(int customerId, String email) {
-        Customer customer =  read(customerId);
-        if(customer !=null){
+        Customer customer = read(customerId);
+        if (customer != null) {
             customer.setCustomerEmail(email);
         }
     }

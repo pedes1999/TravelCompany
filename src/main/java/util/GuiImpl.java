@@ -30,7 +30,7 @@ public class GuiImpl {
     private final MarketService marketService;
     boolean isRunning = true; // boolean to control the while condition to terminate Program!
 
-    public GuiImpl(CustomerRepository customerRepository, TicketRepository ticketRepository, ItineraryRepository itineraryRepository,MarketService marketService) {
+    public GuiImpl(CustomerRepository customerRepository, TicketRepository ticketRepository, ItineraryRepository itineraryRepository, MarketService marketService) {
         this.customerRepository = customerRepository;
         this.ticketRepository = ticketRepository;
         this.itineraryRepository = itineraryRepository;
@@ -53,16 +53,17 @@ public class GuiImpl {
             System.out.printf("-------------------------------------------------------\n");
             System.out.println("ITINERARY INFORMATION");
             System.out.println("5: Check The Full Itinerary List");
-            System.out.println("6 : Check The Itinerary List Based on Departure/Destination Code");
+            System.out.println("6 : Check The Itinerary List Based Departure Code");
+            System.out.println("7 : Check The Itinerary List Based Destination Code");
             System.out.printf("------------------------------------------------------\n");
             System.out.println("TICKET INFORMATION");
-            System.out.println("7 : Check The Ticket List");
+            System.out.println("8 : Check The Ticket List");
             System.out.printf("------------------------------------------------------\n");
             System.out.println("CREATE INSTANCES");
-            System.out.println("8 : Create a new Customer");
-            System.out.println("9 : Create a new Itinerary");
-            System.out.println("10 : Create a new Ticket");
-            System.out.println("11 : Exit");
+            System.out.println("9 : Create a new Customer");
+            System.out.println("10 : Create a new Itinerary");
+            System.out.println("11 : Create a new Ticket");
+            System.out.println("12 : Exit");
             System.out.printf("-------------------------------------------------------\n");
 
             //Get Input By User
@@ -111,46 +112,58 @@ public class GuiImpl {
                     System.out.println(i);
                 }
             }
-//            //Print itineraryList based on Departure/Destination Code
-//            if (choice.equals(6)) {
-//                List<Itinerary> departureList = itineraryService.searchPerDepartureOrDestination(itineraryList);
-//                for (Itinerary i : departureList) {
-//                    System.out.println(i);
-//                }
-//            }
-            //Print Ticket List (empty at start)
+            //Print itineraryList based on Departure Code
+            if (choice.equals(6)) {
+                AirportCode airCode = getAirportCode();
+
+                List<Itinerary> departureList = marketService.searchDeparture(airCode);
+                for (Itinerary i : departureList) {
+                    System.out.println(i);
+                }
+            }
+
             if (choice.equals(7)) {
+                AirportCode airCode = getAirportCode();
+                List<Itinerary> destinationList = marketService.searchDestination(airCode);
+                for (Itinerary i : destinationList) {
+                    System.out.println(i);
+                }
+            }
+            //Print Ticket List (empty at start)
+            if (choice.equals(8)) {
                 for (Ticket t : ticketRepository.read()) {
                     System.out.println(t);
                 }
             }
 //            //Create a new Customer
-            if (choice.equals(8)) {
+            if (choice.equals(9)) {
                 Customer newCustomer = createCustomerFromConsole();
                 marketService.addCustomer(newCustomer);
                 System.out.println("Customer was created Successfully!!");
             }
             //Create a new Itinerary
-            if (choice.equals(9)) {
-                Itinerary newItinerary =createItineraryFromConsole();
-               marketService.addItinerary(newItinerary);
+            if (choice.equals(10)) {
+                Itinerary newItinerary = createItineraryFromConsole();
+                marketService.addItinerary(newItinerary);
                 System.out.println("Itinerary was Created Successfully!!");
             }
             //Create a new Ticket
-            if (choice.equals(10)) {
+            if (choice.equals(11)) {
                 Ticket newTicket = createTicketFromConsole();
                 marketService.addTicket(newTicket);
                 System.out.println("Ticket was Created Successfully!!");
 
             }
             //Exit the programm
-            if (choice.equals(11)) {
+            if (choice.equals(12)) {
                 isRunning = false;
             }
 
         } while (isRunning);
+
     }
-     public Customer createCustomerFromConsole() {
+
+    public Customer createCustomerFromConsole() {
         Scanner sc = new Scanner(System.in);
 
         Customer newCustomer = new Customer();
@@ -198,15 +211,12 @@ public class GuiImpl {
 
         return newCustomer;
     }
-    
-    
+
     //Create itineraryFromConsole
-     public Itinerary createItineraryFromConsole() {
+    public Itinerary createItineraryFromConsole() {
         Scanner sc = new Scanner(System.in);
- 
 
         Itinerary newItinerary = new Itinerary();
-
 
         //AIrline is always SKylines
         newItinerary.setItineraryAirline("Skyline");
@@ -306,9 +316,7 @@ public class GuiImpl {
 
         return newItinerary;
     }
-     
-     
-     
+
     //CREATE TICKET FROM CONSOLE
     public Ticket createTicketFromConsole() {
         Scanner sc = new Scanner(System.in);
@@ -319,7 +327,7 @@ public class GuiImpl {
         for (Customer c : customerRepository.read()) {
             System.out.println(c);
         }
-        Integer customerId = sc.nextInt() ;
+        Integer customerId = sc.nextInt();
 
         //Select a customer from the list
         Customer selectedCustomer = customerRepository.read(customerId);
@@ -331,7 +339,7 @@ public class GuiImpl {
         for (Itinerary t : itineraryRepository.read()) {
             System.out.println(t);
         }
-        Integer itineraryId = sc.nextInt() ;
+        Integer itineraryId = sc.nextInt();
 
         //Select a customer from the list
         Itinerary selectedItinerary = itineraryRepository.read(itineraryId);
@@ -368,6 +376,45 @@ public class GuiImpl {
         int ticketsPurchased = selectedCustomer.getTicketsPurchased();
         selectedCustomer.setTicketsPurchased(ticketsPurchased + 1);
         return newTicket;
+
+    }
+
+    //GET AIRPORT CODE FROM USER
+    public AirportCode getAirportCode() {
+        System.out.println("===============================================");
+        System.out.println("Please Give a number based on your Preference");
+        System.out.println("===============================================");
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Please State Itinerary's Airport Code : ");
+            System.out.println("1 : PAR");
+            System.out.println("2 : LON");
+            System.out.println("3 : AMS");
+            System.out.println("4 : DUB");
+            System.out.println("5 : FRA");
+            System.out.println("6 : MEX");
+            System.out.println("7 : ATH");
+            Integer choiceDeparture = sc.nextInt();
+            if (choiceDeparture == 1) {
+                return AirportCode.PAR;
+            } else if (choiceDeparture == 2) {
+                return AirportCode.LON;
+            } else if (choiceDeparture == 3) {
+                return AirportCode.AMS;
+            } else if (choiceDeparture == 4) {
+                return AirportCode.DUB;
+            } else if (choiceDeparture == 5) {
+                return AirportCode.FRA;
+            } else if (choiceDeparture == 6) {
+                return AirportCode.MEX;
+            } else if (choiceDeparture == 7) {
+                return AirportCode.ATH;
+            } else {
+                System.out.println("Please enter a valid Airport Code");
+            }
+             return null;
+        }
 
     }
 

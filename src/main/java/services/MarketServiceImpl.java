@@ -73,25 +73,13 @@ public class MarketServiceImpl implements MarketService {
 
     //READ BASED ON DEPARTURE/DESTINATION CODE
     @Override
-    public List<Itinerary> readDeparture(AirportCode airportCode, List<Itinerary> itineraryList) {
-        List<Itinerary> departureList = new ArrayList<>();
-        for (Itinerary itinerary : itineraryList) {
-            if (itinerary.getItineraryDeparture().equals(airportCode)) {
-                departureList.add(itinerary);
-            }
-        }
-        return departureList;
+    public List<Itinerary> searchDeparture(AirportCode airportCode) {
+        return itineraryRepository.searchPerDeparture(airportCode);
     }
 
     @Override
-    public List<Itinerary> readDestination(AirportCode airportCode, List<Itinerary> itineraryList) {
-        List<Itinerary> destinationList = new ArrayList<>();
-        for (Itinerary itinerary : itineraryList) {
-            if (itinerary.getIteneraryDestination().equals(airportCode)) {
-                destinationList.add(itinerary);
-            }
-        }
-        return destinationList;
+    public List<Itinerary> searchDestination(AirportCode airportCode) {
+        return itineraryRepository.searchPerDestination(airportCode);
     }
 
     //DISCOUNT METHOD

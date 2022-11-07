@@ -22,11 +22,11 @@ public interface MarketService {
     boolean addItinerary(Itinerary itinerary);
     boolean addTicket(Ticket ticket);
     
-      //READ BASED ON DEPARTURE
-    List<Itinerary> readDeparture(AirportCode airportCode,List<Itinerary> itineraryList);
+      //Search BASED ON DEPARTURE
+    List<Itinerary> searchDeparture(AirportCode airportCode);
     
-    //READ BASED ON DESTINATION
-    List<Itinerary> readDestination(AirportCode airportCode,List<Itinerary> itineraryList);
+    //Search BASED ON DESTINATION
+    List<Itinerary> searchDestination(AirportCode airportCode);
     
     double discount(PaymentMethod paymentMethod, CustomerCategory customerCategory, double initialPrice);
 

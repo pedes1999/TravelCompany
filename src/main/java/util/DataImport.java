@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package util;
 
 import enums.AirportCode;
@@ -12,16 +8,11 @@ import java.util.List;
 import model.Customer;
 import model.Itinerary;
 import model.Ticket;
-
 import repository.CustomerRepository;
 import repository.ItineraryRepository;
 import repository.TicketRepository;
 import services.MarketService;
 
-/**
- *
- * @author pnbdr
- */
 public class DataImport {
 
     private final CustomerRepository customerRepository;
@@ -54,15 +45,15 @@ public class DataImport {
     }
 
     public List<Ticket> insertTickets(List<Customer> customerList, List<Itinerary> itineraryList) {
-        ticketRepository.create(new Ticket(1, itineraryList.get(2).getId(), customerList.get(0).getId(), PaymentMethod.CASH, marketService.discount(PaymentMethod.CASH, customerList.get(0).getCustomerCategory(), itineraryList.get(1).getBasicPrice())));
-        ticketRepository.create(new Ticket(2, itineraryList.get(3).getId(), customerList.get(1).getId(), PaymentMethod.CASH, marketService.discount(PaymentMethod.CASH, customerList.get(1).getCustomerCategory(), itineraryList.get(2).getBasicPrice())));
-        ticketRepository.create(new Ticket(3, itineraryList.get(3).getId(), customerList.get(2).getId(), PaymentMethod.CREDIT, marketService.discount(PaymentMethod.CREDIT, customerList.get(2).getCustomerCategory(), itineraryList.get(2).getBasicPrice())));
-        ticketRepository.create(new Ticket(4, itineraryList.get(4).getId(), customerList.get(1).getId(), PaymentMethod.CREDIT, marketService.discount(PaymentMethod.CREDIT, customerList.get(1).getCustomerCategory(), itineraryList.get(3).getBasicPrice())));
-        ticketRepository.create(new Ticket(5, itineraryList.get(4).getId(), customerList.get(2).getId(), PaymentMethod.CASH, marketService.discount(PaymentMethod.CASH, customerList.get(2).getCustomerCategory(), itineraryList.get(3).getBasicPrice())));
-        ticketRepository.create(new Ticket(6, itineraryList.get(7).getId(), customerList.get(3).getId(), PaymentMethod.CREDIT, marketService.discount(PaymentMethod.CREDIT, customerList.get(3).getCustomerCategory(), itineraryList.get(6).getBasicPrice())));
-        ticketRepository.create(new Ticket(7, itineraryList.get(7).getId(), customerList.get(4).getId(), PaymentMethod.CREDIT, marketService.discount(PaymentMethod.CREDIT, customerList.get(4).getCustomerCategory(), itineraryList.get(6).getBasicPrice())));
-        ticketRepository.create(new Ticket(8, itineraryList.get(8).getId(), customerList.get(1).getId(), PaymentMethod.CASH, marketService.discount(PaymentMethod.CASH, customerList.get(1).getCustomerCategory(), itineraryList.get(8).getBasicPrice())));
-        ticketRepository.create(new Ticket(9, itineraryList.get(3).getId(), customerList.get(0).getId(), PaymentMethod.CASH, marketService.discount(PaymentMethod.CASH, customerList.get(0).getCustomerCategory(), itineraryList.get(2).getBasicPrice())));
+        ticketRepository.create(new Ticket(1, itineraryList.get(1).getId(), customerList.get(0).getId(), PaymentMethod.CASH, marketService.discount(PaymentMethod.CASH, customerList.get(0).getCustomerCategory(), itineraryList.get(1).getBasicPrice())));
+        ticketRepository.create(new Ticket(2, itineraryList.get(2).getId(), customerList.get(1).getId(), PaymentMethod.CASH, marketService.discount(PaymentMethod.CASH, customerList.get(1).getCustomerCategory(), itineraryList.get(2).getBasicPrice())));
+        ticketRepository.create(new Ticket(3, itineraryList.get(2).getId(), customerList.get(2).getId(), PaymentMethod.CREDIT, marketService.discount(PaymentMethod.CREDIT, customerList.get(2).getCustomerCategory(), itineraryList.get(2).getBasicPrice())));
+        ticketRepository.create(new Ticket(4, itineraryList.get(3).getId(), customerList.get(1).getId(), PaymentMethod.CREDIT, marketService.discount(PaymentMethod.CREDIT, customerList.get(1).getCustomerCategory(), itineraryList.get(3).getBasicPrice())));
+        ticketRepository.create(new Ticket(5, itineraryList.get(3).getId(), customerList.get(2).getId(), PaymentMethod.CASH, marketService.discount(PaymentMethod.CASH, customerList.get(2).getCustomerCategory(), itineraryList.get(3).getBasicPrice())));
+        ticketRepository.create(new Ticket(6, itineraryList.get(6).getId(), customerList.get(3).getId(), PaymentMethod.CREDIT, marketService.discount(PaymentMethod.CREDIT, customerList.get(3).getCustomerCategory(), itineraryList.get(6).getBasicPrice())));
+        ticketRepository.create(new Ticket(7, itineraryList.get(6).getId(), customerList.get(4).getId(), PaymentMethod.CREDIT, marketService.discount(PaymentMethod.CREDIT, customerList.get(4).getCustomerCategory(), itineraryList.get(6).getBasicPrice())));
+        ticketRepository.create(new Ticket(8, itineraryList.get(7).getId(), customerList.get(1).getId(), PaymentMethod.CASH, marketService.discount(PaymentMethod.CASH, customerList.get(1).getCustomerCategory(), itineraryList.get(7).getBasicPrice())));
+        ticketRepository.create(new Ticket(9, itineraryList.get(2).getId(), customerList.get(0).getId(), PaymentMethod.CASH, marketService.discount(PaymentMethod.CASH, customerList.get(0).getCustomerCategory(), itineraryList.get(2).getBasicPrice())));
         return ticketRepository.read();
     }
 
