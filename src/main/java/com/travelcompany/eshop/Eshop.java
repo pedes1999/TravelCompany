@@ -46,29 +46,29 @@ public class Eshop {
         boolean isRunning = true; // boolean to control the while condition to terminate Program!
         do {
 
-            System.out.printf("--------------------------------------------\n");
+            System.out.printf("-------------------------------------------------------\n");
             System.out.println("Please Give a number based on your Preference");
-            System.out.printf("--------------------------------------------\n");
+            System.out.printf("-------------------------------------------------------\n");
             System.out.println("CUSTOMER INFORMATION");
-            System.out.printf("--------------------------------------------\n");
+            System.out.printf("-------------------------------------------------------\n");
             System.out.println("1 : Check The Customer List");
             System.out.println("2 : Check The Customers who haven't bought any Tickets");
             System.out.println("3 : Check The Customers who have most Tickets");
             System.out.println("4 : Check The Customers with the largest cost of tickets");
-            System.out.printf("--------------------------------------------\n");
+            System.out.printf("-------------------------------------------------------\n");
             System.out.println("ITINERARY INFORMATION");
             System.out.println("5: Check The Full Itinerary List");
             System.out.println("6 : Check The Itinerary List Based on Departure/Destination Code");
-            System.out.printf("--------------------------------------------\n");
+            System.out.printf("------------------------------------------------------\n");
             System.out.println("TICKET INFORMATION");
             System.out.println("7 : Check The Ticket List");
-            System.out.printf("--------------------------------------------\n");
+            System.out.printf("------------------------------------------------------\n");
             System.out.println("CREATE INSTANCES");
             System.out.println("8 : Create a new Customer");
             System.out.println("9 : Create a new Itinerary");
             System.out.println("10 : Create a new Ticket");
             System.out.println("11 : Exit");
-            System.out.printf("--------------------------------------------\n");
+            System.out.printf("-------------------------------------------------------\n");
 
             //Get Input By User
             Scanner sc = new Scanner(System.in);
