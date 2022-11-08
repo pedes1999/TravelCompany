@@ -1,14 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package services;
 
 import enums.AirportCode;
 import enums.CustomerCategory;
 import enums.PaymentMethod;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import model.Customer;
 import model.Itinerary;
 import model.Ticket;
@@ -16,10 +14,6 @@ import repository.CustomerRepository;
 import repository.ItineraryRepository;
 import repository.TicketRepository;
 
-/**
- *
- * @author pnbdr
- */
 public class MarketServiceImpl implements MarketService {
 
     private final CustomerRepository customerRepository;
@@ -58,7 +52,7 @@ public class MarketServiceImpl implements MarketService {
         itineraryRepository.create(itinerary);
         return true;
     }
-    
+
     //Add Ticket
     @Override
     public boolean addTicket(Ticket ticket) {
@@ -74,12 +68,24 @@ public class MarketServiceImpl implements MarketService {
     //READ BASED ON DEPARTURE/DESTINATION CODE
     @Override
     public List<Itinerary> searchDeparture(AirportCode airportCode) {
-        return itineraryRepository.searchPerDeparture(airportCode);
+        List<Itinerary> departureList = new ArrayList<>();
+        for (Itinerary itinerary : itineraryRepository.read()) {
+            if (itinerary.getItineraryDeparture().equals(airportCode)) {
+                departureList.add(itinerary);
+            }
+        }
+        return departureList;
     }
 
     @Override
     public List<Itinerary> searchDestination(AirportCode airportCode) {
-        return itineraryRepository.searchPerDestination(airportCode);
+        List<Itinerary> destinationList = new ArrayList<>();
+        for (Itinerary itinerary : itineraryRepository.read()) {
+            if (itinerary.getIteneraryDestination().equals(airportCode)) {
+                destinationList.add(itinerary);
+            }
+        }
+        return destinationList;
     }
 
     //DISCOUNT METHOD
@@ -103,4 +109,41 @@ public class MarketServiceImpl implements MarketService {
 
         return 0;
     }
+    
+    //SEARCH FOR CUSTOMERS THAT HAVENT BOUGHT TICKETS
+    @Override
+    public List<Customer> searchIfNotBuy(List<Customer> customerList, List<Ticket> ticketList) {
+        List<Customer> customerHasBoughtTicket = new ArrayList<>();
+        List<Customer> customerListTemp = new ArrayList<>();
+        customerListTemp.addAll(customerList);
+
+        for (Customer customer : customerList) {
+            for (Ticket ticket : ticketList) {
+                if (ticket.getCustomerId() == customer.getId() && !customerHasBoughtTicket.contains(customer)) {
+                    customerHasBoughtTicket.add(customer);
+                }
+            }
+        }
+        customerListTemp.removeAll(customerHasBoughtTicket);
+        return customerListTemp;
+    }
+    //SEARCH FOR CUSTOMERS WITH THE MOST TICKETS
+     @Override
+    public List<Customer> customerMostTickets(List<Customer> customerList, List<Ticket> ticketList) {
+        Set<Customer> setWithMostTickets = new HashSet<>();
+        for (Customer c : customerList) {
+            for (Ticket t : ticketList) {
+                if (c.getId() == t.getCustomerId()) {
+
+                    setWithMostTickets.add(c);
+
+                }
+
+            }
+        }
+
+        List<Customer> listWithMostTickets = new ArrayList<>(setWithMostTickets);
+        return listWithMostTickets;
+    }
+
 }

@@ -4,9 +4,13 @@
  */
 package util;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import enums.AirportCode;
 import enums.CustomerCategory;
 import enums.PaymentMethod;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -48,22 +52,21 @@ public class GuiImpl {
             System.out.printf("-------------------------------------------------------\n");
             System.out.println("1 : Check The Customer List");
             System.out.println("2 : Check The Customers who haven't bought any Tickets");
-            System.out.println("3 : Check The Customers who have most Tickets");
-            System.out.println("4 : Check The Customers with the largest cost of tickets");
+            System.out.println("3 : Check The Customers who have most Tickets sorted by Price");
             System.out.printf("-------------------------------------------------------\n");
             System.out.println("ITINERARY INFORMATION");
-            System.out.println("5: Check The Full Itinerary List");
-            System.out.println("6 : Check The Itinerary List Based Departure Code");
-            System.out.println("7 : Check The Itinerary List Based Destination Code");
+            System.out.println("4: Check The Full Itinerary List");
+            System.out.println("5 : Check The Itinerary List Based Departure Code");
+            System.out.println("6 : Check The Itinerary List Based Destination Code");
             System.out.printf("------------------------------------------------------\n");
             System.out.println("TICKET INFORMATION");
-            System.out.println("8 : Check The Ticket List");
+            System.out.println("7 : Check The Ticket List");
             System.out.printf("------------------------------------------------------\n");
             System.out.println("CREATE INSTANCES");
-            System.out.println("9 : Create a new Customer");
-            System.out.println("10 : Create a new Itinerary");
-            System.out.println("11 : Create a new Ticket");
-            System.out.println("12 : Exit");
+            System.out.println("8 : Create a new Customer");
+            System.out.println("9 : Create a new Itinerary");
+            System.out.println("10 : Create a new Ticket");
+            System.out.println("11 : Exit");
             System.out.printf("-------------------------------------------------------\n");
 
             //Get Input By User
@@ -72,90 +75,62 @@ public class GuiImpl {
 
             //Print Customer List
             if (choice.equals(1)) {
-
-                for (Customer c : customerRepository.read()) {
-                    System.out.println(c);
-                }
-
+                System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(customerRepository.read()));
             }
 //            //Print Customers who havent bought anything
-//            if (choice.equals(2)) {
-//                List<Customer> customerNotPurchasedList = customerRepository.searchIfNotBuy(customerList, ticketList);
-//                for (Customer c : customerNotPurchasedList) {
-//                    System.out.println(c);
-//                }
-//            }
-//            //List of the customers with the most tickets 
-//            if (choice.equals(3)) {
-//
-//                List<Customer> customerWithMostTickets = customerRepository.customerMostTickets(customerList, ticketList);
-//                Comparator<Customer> ticketComparator = (c1, c2) -> {
-//                    return c2.getTicketsPurchased() - c1.getTicketsPurchased();
-//                };
-//                Collections.sort(customerWithMostTickets, ticketComparator);
-//                for (Customer c : customerWithMostTickets) {
-//                    System.out.println(c.toStringTicket());
-//                }
-//            }
-//            //List of the customer with the highest money Spent
-//            if (choice.equals(4)) {
-//
-//                List<Customer> customerWithHighestCost = customerRepository.customerMostTickets(customerList, ticketList);
-//                Collections.sort(customerWithHighestCost);
-//                for (Customer c : customerWithHighestCost) {
-//                    System.out.println(c.toStringCost());
-//                }
-//            }
+            if (choice.equals(2)) {
+                List<Customer> customerNotPurchasedList = marketService.searchIfNotBuy(customerRepository.read(), ticketRepository.read());
+                System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(customerNotPurchasedList));
+            }
+//            //List of the customers with the most tickets and highest amountPaid
+            if (choice.equals(3)) {
+
+                List<Customer> customerWithMostTickets = marketService.customerMostTickets(customerRepository.read(), ticketRepository.read());
+                System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(customerWithMostTickets));
+            }
+
 //            //Print Itinerary List
-            if (choice.equals(5)) {
-                for (Itinerary i : itineraryRepository.read()) {
-                    System.out.println(i);
-                }
+            if (choice.equals(4)) {
+                System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(itineraryRepository.read()));
             }
             //Print itineraryList based on Departure Code
-            if (choice.equals(6)) {
+            if (choice.equals(5)) {
                 AirportCode airCode = getAirportCode();
 
                 List<Itinerary> departureList = marketService.searchDeparture(airCode);
-                for (Itinerary i : departureList) {
-                    System.out.println(i);
-                }
+               System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(departureList));
             }
 
-            if (choice.equals(7)) {
+            if (choice.equals(6)) {
                 AirportCode airCode = getAirportCode();
                 List<Itinerary> destinationList = marketService.searchDestination(airCode);
-                for (Itinerary i : destinationList) {
-                    System.out.println(i);
-                }
+                System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(destinationList ));
             }
             //Print Ticket List (empty at start)
-            if (choice.equals(8)) {
-                for (Ticket t : ticketRepository.read()) {
-                    System.out.println(t);
-                }
+            if (choice.equals(7)) {
+                System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(ticketRepository.read()));
             }
 //            //Create a new Customer
-            if (choice.equals(9)) {
+            if (choice.equals(8)) {
                 Customer newCustomer = createCustomerFromConsole();
                 marketService.addCustomer(newCustomer);
                 System.out.println("Customer was created Successfully!!");
             }
             //Create a new Itinerary
-            if (choice.equals(10)) {
+            if (choice.equals(9)) {
                 Itinerary newItinerary = createItineraryFromConsole();
                 marketService.addItinerary(newItinerary);
                 System.out.println("Itinerary was Created Successfully!!");
             }
             //Create a new Ticket
-            if (choice.equals(11)) {
+            if (choice.equals(10)) {
                 Ticket newTicket = createTicketFromConsole();
                 marketService.addTicket(newTicket);
                 System.out.println("Ticket was Created Successfully!!");
 
             }
             //Exit the programm
-            if (choice.equals(12)) {
+            if (choice.equals(11)) {
                 isRunning = false;
             }
 
@@ -364,12 +339,9 @@ public class GuiImpl {
         }
 
         //Set Ticket PaymentAmount
-        System.out.println(newTicket.getPaymentMethod());
-        System.out.println(selectedCustomer.getCustomerCategory());
-        System.out.println(selectedItinerary.getBasicPrice());
         double ticketPrice = marketService.discount(newTicket.getPaymentMethod(), selectedCustomer.getCustomerCategory(), selectedItinerary.getBasicPrice());
         newTicket.setPaymentAmount(ticketPrice);
-        //SET CUSTOMER SPENT
+        //Set Customer's money spent
         double initialCustomerSpent = selectedCustomer.getCustomerSpent();
         selectedCustomer.setCustomerSpent(initialCustomerSpent + ticketPrice);
         //SET TICKETS PURCHASED
@@ -413,7 +385,7 @@ public class GuiImpl {
             } else {
                 System.out.println("Please enter a valid Airport Code");
             }
-             return null;
+            return null;
         }
 
     }

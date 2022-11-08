@@ -29,7 +29,11 @@ public interface MarketService {
     List<Itinerary> searchDestination(AirportCode airportCode);
     
     double discount(PaymentMethod paymentMethod, CustomerCategory customerCategory, double initialPrice);
-
+    //search customers who didnt buy any tickets
+    List<Customer> searchIfNotBuy(List<Customer> customerList, List<Ticket> ticketList);
+    
+    //search customers who have the most tickets
+    List<Customer> customerMostTickets(List<Customer> customerList, List<Ticket> ticketList);
    
     
 }
