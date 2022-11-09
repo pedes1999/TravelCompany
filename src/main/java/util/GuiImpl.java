@@ -1,6 +1,7 @@
 package util;
 
 import com.google.gson.GsonBuilder;
+import com.travelcompany.eshop.Eshop;
 import enums.AirportCode;
 import enums.CustomerCategory;
 import enums.PaymentMethod;
@@ -8,12 +9,15 @@ import exceptions.MarketException;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Customer;
 import model.Itinerary;
 import model.Ticket;
 import repository.CustomerRepository;
 import repository.ItineraryRepository;
 import repository.TicketRepository;
+import services.IoServices;
 import services.MarketService;
 
 public class GuiImpl {
@@ -22,18 +26,19 @@ public class GuiImpl {
     private final TicketRepository ticketRepository;
     private final ItineraryRepository itineraryRepository;
     private final MarketService marketService;
+    private final IoServices ioService;
     boolean isRunning = true;
 
-    public GuiImpl(CustomerRepository customerRepository, TicketRepository ticketRepository, ItineraryRepository itineraryRepository, MarketService marketService) {
+    public GuiImpl(CustomerRepository customerRepository, TicketRepository ticketRepository, ItineraryRepository itineraryRepository, MarketService marketService, IoServices ioService) {
         this.customerRepository = customerRepository;
         this.ticketRepository = ticketRepository;
         this.itineraryRepository = itineraryRepository;
         this.marketService = marketService;
-
+        this.ioService = ioService;
     }
 
     /**
-     *  INITIALIZES THE CONSOLE GUI WITH ALL THE OPTIONS
+     * INITIALIZES THE CONSOLE GUI WITH ALL THE OPTIONS
      */
     public void printGui() {
         do {
@@ -55,18 +60,21 @@ public class GuiImpl {
             System.out.println("CUSTOMER INFORMATION");
             System.out.printf("-------------------------------------------------------\n");
             System.out.println("7 : Check The Customer List");
+            System.out.println("8 : Save Customers To CSV");
             System.out.printf("-------------------------------------------------------\n");
             System.out.println("ITINERARY INFORMATION");
-            System.out.println("8: Check The Full Itinerary List");
+            System.out.println("9: Check The Full Itinerary List");
+            System.out.println("10: Save Itineraries to CSV");
             System.out.printf("------------------------------------------------------\n");
             System.out.println("TICKET INFORMATION");
-            System.out.println("9 : Check The Ticket List");
+            System.out.println("11 : Check The Ticket List");
+            System.out.println("12 : Save tickets To CSV");
             System.out.printf("------------------------------------------------------\n");
             System.out.println("CREATE INSTANCES");
-            System.out.println("10 : Create a new Customer");
-            System.out.println("11 : Create a new Itinerary");
-            System.out.println("12 : Create a new Ticket");
-            System.out.println("13 : Exit");
+            System.out.println("13 : Create a new Customer");
+            System.out.println("14 : Create a new Itinerary");
+            System.out.println("15 : Create a new Ticket");
+            System.out.println("16 : Exit");
             System.out.printf("-------------------------------------------------------\n");
 
             Scanner sc = new Scanner(System.in);
@@ -104,12 +112,34 @@ public class GuiImpl {
                 System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(customerRepository.read()));
             }
             if (choice.equals(8)) {
-                System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(itineraryRepository.read()));
+                try {
+                    ioService.saveCustomerToCsv("customers.csv");
+                } catch (MarketException e) {
+                    Logger.getLogger(Eshop.class.getName()).log(Level.SEVERE, null, e);
+                }
             }
             if (choice.equals(9)) {
-                System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(ticketRepository.read()));
+                System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(itineraryRepository.read()));
             }
             if (choice.equals(10)) {
+                try {
+                    ioService.saveItineraryToCsv("itineraries.csv");
+                } catch (MarketException e) {
+                    Logger.getLogger(Eshop.class.getName()).log(Level.SEVERE, null, e);
+                }
+            }
+
+            if (choice.equals(11)) {
+                System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(ticketRepository.read()));
+            }
+            if (choice.equals(12)) {
+                try {
+                    ioService.saveTicketToCsv("tickets.csv");
+                } catch (MarketException e) {
+                    Logger.getLogger(Eshop.class.getName()).log(Level.SEVERE, null, e);
+                }
+            }
+            if (choice.equals(13)) {
                 Customer newCustomer = createCustomerFromConsole();
                 try {
                     marketService.addCustomer(newCustomer);
@@ -118,7 +148,7 @@ public class GuiImpl {
                     e.printStackTrace();
                 }
             }
-            if (choice.equals(11)) {
+            if (choice.equals(14)) {
                 Itinerary newItinerary = createItineraryFromConsole();
                 try {
                     marketService.addItinerary(newItinerary);
@@ -128,7 +158,7 @@ public class GuiImpl {
                 }
 
             }
-            if (choice.equals(12)) {
+            if (choice.equals(15)) {
                 try {
                     Ticket newTicket = createTicketFromConsole();
                     marketService.addTicket(newTicket);
@@ -138,7 +168,7 @@ public class GuiImpl {
                 }
             }
 
-            if (choice.equals(13)) {
+            if (choice.equals(16)) {
                 isRunning = false;
             }
         } while (isRunning);
@@ -200,7 +230,7 @@ public class GuiImpl {
         Itinerary newItinerary = new Itinerary();
 
         newItinerary.setItineraryAirline("Skyline");
-        
+
         while (true) {
             try {
                 System.out.println("Please State Itinerary's Departure Airport Code : (CAPITAL LETTERS) ");

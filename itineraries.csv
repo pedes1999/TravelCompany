@@ -1,0 +1,12 @@
+Id,DepartureAirport Code,Destination AirportCode,Departure date,Airline,Basic price
+1,ATH,PAR,Tue Feb 22 13:35:00 EET 2022,Skylines,300.0
+2,ATH,LON,Tue Feb 22 13:40:00 EET 2022,Skylines,420.0
+3,ATH,AMS,Tue Feb 22 13:45:00 EET 2022,Skylines,280.0
+4,ATH,PAR,Tue Feb 22 14:20:00 EET 2022,Skylines,310.0
+5,ATH,DUB,Tue Feb 22 14:35:00 EET 2022,Skylines,880.0
+6,ATH,FRA,Tue Feb 22 14:55:00 EET 2022,Skylines,380.0
+7,ATH,FRA,Tue Feb 22 15:35:00 EET 2022,Skylines,350.0
+8,ATH,MEX,Tue Feb 22 16:00:00 EET 2022,Skylines,1020.0
+9,ATH,DUB,Tue Feb 22 16:35:00 EET 2022,Skylines,770.0
+10,DUB,LON,Tue Feb 22 17:40:00 EET 2022,Skylines,1000.0
+11,AMS,DUB,Tue Nov 22 15:35:00 EET 2022,Skyline,5000.0
