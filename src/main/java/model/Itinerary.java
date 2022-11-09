@@ -24,7 +24,7 @@ public class Itinerary extends PersistentClass {
         this.basicPrice = basicPrice;
     }
 
-    public AirportCode getIteneraryDestination() {
+    public AirportCode getItineraryDestination() {
         return itineraryDestination;
     }
 

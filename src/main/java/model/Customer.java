@@ -9,8 +9,6 @@ public class Customer extends PersistentClass implements Comparable<Customer> {
     private String customerAddress;
     private String customerNationality;
     private CustomerCategory customerCategory;
-
-    //TEST
     private double customerSpent;
     private int ticketsPurchased;
 
@@ -18,7 +16,6 @@ public class Customer extends PersistentClass implements Comparable<Customer> {
 
     }
 
-    //OVERLOAD CONSTRUCTORS FOR TicketsPurchased
     public Customer(int id, String customerName, String customerEmail, String customerAddress, String customerNationality, CustomerCategory customerCategory) {
         setId(id);
         this.customerName = customerName;
@@ -78,7 +75,6 @@ public class Customer extends PersistentClass implements Comparable<Customer> {
         this.customerCategory = customerCategory;
     }
 
-    //TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public double getCustomerSpent() {
         return customerSpent;
     }
@@ -100,14 +96,11 @@ public class Customer extends PersistentClass implements Comparable<Customer> {
         return "Id= " + getId() + ", Name=" + customerName + ", Email=" + customerEmail + ", Address=" + customerAddress + ", Nationality=" + customerNationality + ", Category=" + customerCategory;
     }
 
-    public String toStringTicket() {
-        return "Id= " + getId() + ", Name=" + customerName + ", Email=" + customerEmail + ", Address=" + customerAddress + ", Nationality=" + customerNationality + ", Category=" + customerCategory + ", Tickets=" + ticketsPurchased;
-    }
-
-    public String toStringCost() {
-        return "Id= " + getId() + ", Name=" + customerName + ", Email=" + customerEmail + ", Address=" + customerAddress + ", Nationality=" + customerNationality + ", Category=" + customerCategory + ", Spent=" + customerSpent;
-    }
-
+    /**
+     *
+     * @param o
+     * @return compares customers first by amount paid and the by id
+     */
     @Override
     public int compareTo(Customer o) {
         if (o == null) {

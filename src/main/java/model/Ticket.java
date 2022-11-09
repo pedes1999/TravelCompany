@@ -4,16 +4,16 @@ import enums.PaymentMethod;
 
 public class Ticket extends PersistentClass {
 
-    private int customerId;
-    private int itineraryId;
+    private Integer customerId;
+    private Integer itineraryId;
     private PaymentMethod paymentMethod;
-    private double paymentAmount;
+    private Double paymentAmount;
 
     public Ticket() {
 
     }
 
-    public Ticket(int id, int itineraryId, int customerId, PaymentMethod paymentMethod, double paymentAmount) {
+    public Ticket(int id, int customerId,int itineraryId, PaymentMethod paymentMethod, double paymentAmount) {
         setId(id);
         this.customerId = customerId;
         this.itineraryId = itineraryId;
@@ -21,7 +21,7 @@ public class Ticket extends PersistentClass {
         this.paymentAmount = paymentAmount;
     }
 
-    public int getIteneraryId() {
+    public Integer getItineraryId() {
         return itineraryId;
     }
 
@@ -29,7 +29,7 @@ public class Ticket extends PersistentClass {
         this.itineraryId = iteneraryId;
     }
 
-    public int getCustomerId() {
+    public Integer getCustomerId() {
         return customerId;
     }
 
@@ -45,7 +45,7 @@ public class Ticket extends PersistentClass {
         this.paymentMethod = paymentMethod;
     }
 
-    public double getPaymentAmount() {
+    public Double getPaymentAmount() {
         return paymentAmount;
     }
 

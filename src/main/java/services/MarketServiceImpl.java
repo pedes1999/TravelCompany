@@ -1,9 +1,12 @@
 package services;
 
+import comparators.CustomerPriceComparator;
+import dtos.TotalCustTotalCost;
 import enums.AirportCode;
 import enums.CustomerCategory;
 import enums.PaymentMethod;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +16,9 @@ import model.Ticket;
 import repository.CustomerRepository;
 import repository.ItineraryRepository;
 import repository.TicketRepository;
+import comparators.CustomerTicketComparator;
+import exceptions.MarketException;
+import exceptions.MarketExceptionCodes;
 
 public class MarketServiceImpl implements MarketService {
 
@@ -26,69 +32,63 @@ public class MarketServiceImpl implements MarketService {
         this.itineraryRepository = itineraryRepository;
     }
 
-    //Add Customer
     @Override
-    public boolean addCustomer(Customer customer) {
+    public boolean addCustomer(Customer customer) throws MarketException {
 
         if (customer == null) {
-            return false;
+            throw new MarketException(MarketExceptionCodes.CUSTOMER_NOT_FOUND);
         }
-        if (customer.getCustomerEmail() == null) {
-            return false;
+        if (customer.getCustomerEmail().contains("@travelcompany.com")) {
+            throw new MarketException(MarketExceptionCodes.CUSTOMER_INVALID_EMAIL);
         }
 
         customerRepository.create(customer);
         return true;
     }
 
-    //Add Itinerary
     @Override
-    public boolean addItinerary(Itinerary itinerary) {
+    public boolean addItinerary(Itinerary itinerary) throws MarketException {
 
         if (itinerary == null) {
-            return false;
+            throw new MarketException(MarketExceptionCodes.ITINERARY_NOT_FOUND);
+        }
+        if (itinerary.getItineraryDeparture() == null) {
+            throw new MarketException(MarketExceptionCodes.AIRPORT_CODE_NOT_FOUND);
+        }
+        if (itinerary.getItineraryDestination() == null) {
+            throw new MarketException(MarketExceptionCodes.AIRPORT_CODE_NOT_FOUND);
         }
 
         itineraryRepository.create(itinerary);
         return true;
     }
 
-    //Add Ticket
     @Override
-    public boolean addTicket(Ticket ticket) {
-
+    public boolean addTicket(Ticket ticket) throws MarketException {
+        List<Integer> customerIdList = new ArrayList();
+         List<Integer> itineraryIdList = new ArrayList();
+        for (Customer c : customerRepository.read()){
+            customerIdList.add(c.getId());
+        }
+        
+        for (Itinerary i : itineraryRepository.read()){
+            itineraryIdList.add(i.getId());
+        }
         if (ticket == null) {
             return false;
         }
+        
+        if (!customerIdList.contains(ticket.getCustomerId())) {
+            throw new MarketException(MarketExceptionCodes.CUSTOMER_NOT_FOUND);
+        }
 
+       if (!itineraryIdList.contains(ticket.getItineraryId())) {
+            throw new MarketException(MarketExceptionCodes.ITINERARY_NOT_FOUND);
+       }
         ticketRepository.create(ticket);
         return true;
     }
 
-    //READ BASED ON DEPARTURE/DESTINATION CODE
-    @Override
-    public List<Itinerary> searchDeparture(AirportCode airportCode) {
-        List<Itinerary> departureList = new ArrayList<>();
-        for (Itinerary itinerary : itineraryRepository.read()) {
-            if (itinerary.getItineraryDeparture().equals(airportCode)) {
-                departureList.add(itinerary);
-            }
-        }
-        return departureList;
-    }
-
-    @Override
-    public List<Itinerary> searchDestination(AirportCode airportCode) {
-        List<Itinerary> destinationList = new ArrayList<>();
-        for (Itinerary itinerary : itineraryRepository.read()) {
-            if (itinerary.getIteneraryDestination().equals(airportCode)) {
-                destinationList.add(itinerary);
-            }
-        }
-        return destinationList;
-    }
-
-    //DISCOUNT METHOD
     @Override
     public double discount(PaymentMethod paymentMethod, CustomerCategory customerCategory, double initialPrice) {
         if (customerCategory.equals(CustomerCategory.BUSINESS)) {
@@ -109,13 +109,53 @@ public class MarketServiceImpl implements MarketService {
 
         return 0;
     }
-    
-    //SEARCH FOR CUSTOMERS THAT HAVENT BOUGHT TICKETS
+
     @Override
-    public List<Customer> searchIfNotBuy(List<Customer> customerList, List<Ticket> ticketList) {
+    public List<TotalCustTotalCost> searchCustomerNumAndTotalCost(List<Customer> customerList, List<Ticket> ticketList) {
+        List<TotalCustTotalCost> totalList = new ArrayList<>();
+        TotalCustTotalCost totalInfo = new TotalCustTotalCost();
+        double costSum = 0;
+        int customerCounter = 0;
+        for (Customer c : customerList) {
+            customerCounter++;
+        }
+
+        for (Ticket t : ticketList) {
+            costSum = costSum + t.getPaymentAmount();
+        }
+        totalInfo.setTotalCustomers(customerCounter);
+        totalInfo.setTotalTicketPrice(costSum);
+        totalList.add(totalInfo);
+        return totalList;
+    }
+
+    @Override
+    public List<Itinerary> searchDeparture(AirportCode airportCode) {
+        List<Itinerary> departureList = new ArrayList<>();
+        for (Itinerary itinerary : itineraryRepository.read()) {
+            if (itinerary.getItineraryDeparture().equals(airportCode)) {
+                departureList.add(itinerary);
+            }
+        }
+        return departureList;
+    }
+
+    @Override
+    public List<Itinerary> searchDestination(AirportCode airportCode) {
+        List<Itinerary> destinationList = new ArrayList<>();
+        for (Itinerary itinerary : itineraryRepository.read()) {
+            if (itinerary.getItineraryDestination().equals(airportCode)) {
+                destinationList.add(itinerary);
+            }
+        }
+        return destinationList;
+    }
+
+    @Override
+    public List<Customer> SearchCustomersNotPurchased(List<Customer> customerList, List<Ticket> ticketList) {
         List<Customer> customerHasBoughtTicket = new ArrayList<>();
-        List<Customer> customerListTemp = new ArrayList<>();
-        customerListTemp.addAll(customerList);
+        List<Customer> customerNotBought = new ArrayList<>();
+        customerNotBought.addAll(customerList);
 
         for (Customer customer : customerList) {
             for (Ticket ticket : ticketList) {
@@ -124,26 +164,38 @@ public class MarketServiceImpl implements MarketService {
                 }
             }
         }
-        customerListTemp.removeAll(customerHasBoughtTicket);
-        return customerListTemp;
+        customerNotBought.removeAll(customerHasBoughtTicket);
+        return customerNotBought;
     }
-    //SEARCH FOR CUSTOMERS WITH THE MOST TICKETS
-     @Override
-    public List<Customer> customerMostTickets(List<Customer> customerList, List<Ticket> ticketList) {
+
+    @Override
+    public List<Customer> searchCustomersWithMostTickets(List<Customer> customerList, List<Ticket> ticketList) {
         Set<Customer> setWithMostTickets = new HashSet<>();
         for (Customer c : customerList) {
             for (Ticket t : ticketList) {
                 if (c.getId() == t.getCustomerId()) {
-
                     setWithMostTickets.add(c);
-
                 }
-
             }
         }
+        List<Customer> customersWithMostTickets = new ArrayList<>(setWithMostTickets);
+        Collections.sort(customersWithMostTickets, new CustomerTicketComparator());
+        return customersWithMostTickets;
+    }
 
-        List<Customer> listWithMostTickets = new ArrayList<>(setWithMostTickets);
-        return listWithMostTickets;
+    @Override
+    public List<Customer> searchCustomerWithHighestTotalCost(List<Customer> customerList, List<Ticket> ticketList) {
+        Set<Customer> setWithHighestCost = new HashSet<>();
+        for (Customer c : customerList) {
+            for (Ticket t : ticketList) {
+                if (c.getId() == t.getCustomerId()) {
+                    setWithHighestCost.add(c);
+                }
+            }
+        }
+        List<Customer> customersWithHighestCost = new ArrayList<>(setWithHighestCost);
+        Collections.sort(customersWithHighestCost, new CustomerPriceComparator());
+        return customersWithHighestCost;
     }
 
 }

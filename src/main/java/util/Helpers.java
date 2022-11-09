@@ -1,21 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package util;
 
 import java.util.List;
-import model.Customer;
 import model.Ticket;
 import repository.CustomerRepository;
 import repository.ItineraryRepository;
 import repository.TicketRepository;
 import services.MarketService;
 
-/**
- *
- * @author pnbdr
- */
 public class Helpers {
 
     private final CustomerRepository customerRepository;
@@ -30,6 +21,12 @@ public class Helpers {
         this.marketService = marketService;
     }
 
+    /**
+     *
+     * @param customerId
+     * @param ticketList
+     * @return returns the initial Tickets purchased by customers
+     */
     public int getInitialTicketsForCustomer(int customerId, List<Ticket> ticketList) {
         int ticketCounter = 0;
         for (Ticket ticket : ticketRepository.read()) {
@@ -40,9 +37,15 @@ public class Helpers {
         }
         return ticketCounter;
     }
-    
-     public double getInitialMneySpentForCustomer(int customerId, List<Ticket> ticketList) {
-        double moneySpent = 0 ;
+
+    /**
+     *
+     * @param customerId
+     * @param ticketList
+     * @return returns the initial amount paid by customers
+     */
+    public double getInitialMneySpentForCustomer(int customerId, List<Ticket> ticketList) {
+        double moneySpent = 0;
         for (Ticket ticket : ticketRepository.read()) {
             if (customerId == ticket.getCustomerId()) {
                 moneySpent = moneySpent + ticket.getPaymentAmount();
@@ -51,4 +54,5 @@ public class Helpers {
         }
         return moneySpent;
     }
+
 }

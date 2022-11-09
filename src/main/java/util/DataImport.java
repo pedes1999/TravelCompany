@@ -39,7 +39,8 @@ public class DataImport {
         "6,Mario Conti,mconti@mail.com,Rome,Italian,BUSINESS",
         "7,Nathan Martin,nmartin@mail.com,Lyon,French,BUSINESS",
         "8,Enzo Collin,ecollin@mail.com,Lyon,French,INDIVIDUAL",
-        "9,Frederic Michel, fmichel@mail.com,Athens,French,INDIVIDUAL"
+        "9,Frederic Michel, fmichel@mail.com,Athens,French,INDIVIDUAL",
+        "10,Periklis,p@mail.com,Athens,Greek,BUSINESS"
 
     };
 
@@ -52,23 +53,56 @@ public class DataImport {
         "6,ATH,FRA,2022/02/22 14:55,Skylines,380",
         "7,ATH,FRA,2022/02/22 15:35,Skylines,350",
         "8,ATH,MEX,2022/02/22 16:00,Skylines,1020",
-        "9,ATH,DUB,2022/02/22 16:35,Skylines,770"
+        "9,ATH,DUB,2022/02/22 16:35,Skylines,770",
+        "10,DUB,LON,2022/02/22 17:40,Skylines,1000"
+    };
+    private final static String[] TICKETS = {
+        "1,1,2,CASH",
+        "2,2,3,CASH",
+        "3,3,3,CREDIT",
+        "4,2,4,CREDIT",
+        "5,3,4,CASH",
+        "6,4,7,CREDIT",
+        "7,5,7,CREDIT",
+        "8,2,9,CASH",
+        "9,1,3,CASH",
+        "10,6,8,CREDIT",
+        "11,4,5,CREDIT",
+        "12,4,8,CASH",
+        "13,2,8,CREDIT",
+        "14,2,4,CASH",
+        "15,2,4,CASH",
+        "16,4,4,CASH",
+        "16,4,8,CASH"
+
     };
 
+    /**
+     *
+     * @param customerList
+     * @param itineraryList Inserts Initial Tickets to ticketRepo
+     */
     public void insertTickets(List<Customer> customerList, List<Itinerary> itineraryList) {
-        ticketRepository.create(new Ticket(1, itineraryList.get(1).getId(), customerList.get(0).getId(), PaymentMethod.CASH, marketService.discount(PaymentMethod.CASH, customerList.get(0).getCustomerCategory(), itineraryList.get(1).getBasicPrice())));
-        ticketRepository.create(new Ticket(2, itineraryList.get(2).getId(), customerList.get(1).getId(), PaymentMethod.CASH, marketService.discount(PaymentMethod.CASH, customerList.get(1).getCustomerCategory(), itineraryList.get(2).getBasicPrice())));
-        ticketRepository.create(new Ticket(3, itineraryList.get(2).getId(), customerList.get(2).getId(), PaymentMethod.CREDIT, marketService.discount(PaymentMethod.CREDIT, customerList.get(2).getCustomerCategory(), itineraryList.get(2).getBasicPrice())));
-        ticketRepository.create(new Ticket(4, itineraryList.get(3).getId(), customerList.get(1).getId(), PaymentMethod.CREDIT, marketService.discount(PaymentMethod.CREDIT, customerList.get(1).getCustomerCategory(), itineraryList.get(3).getBasicPrice())));
-        ticketRepository.create(new Ticket(5, itineraryList.get(3).getId(), customerList.get(2).getId(), PaymentMethod.CASH, marketService.discount(PaymentMethod.CASH, customerList.get(2).getCustomerCategory(), itineraryList.get(3).getBasicPrice())));
-        ticketRepository.create(new Ticket(6, itineraryList.get(6).getId(), customerList.get(3).getId(), PaymentMethod.CREDIT, marketService.discount(PaymentMethod.CREDIT, customerList.get(3).getCustomerCategory(), itineraryList.get(6).getBasicPrice())));
-        ticketRepository.create(new Ticket(7, itineraryList.get(6).getId(), customerList.get(4).getId(), PaymentMethod.CREDIT, marketService.discount(PaymentMethod.CREDIT, customerList.get(4).getCustomerCategory(), itineraryList.get(6).getBasicPrice())));
-        ticketRepository.create(new Ticket(8, itineraryList.get(7).getId(), customerList.get(1).getId(), PaymentMethod.CASH, marketService.discount(PaymentMethod.CASH, customerList.get(1).getCustomerCategory(), itineraryList.get(7).getBasicPrice())));
-        ticketRepository.create(new Ticket(9, itineraryList.get(2).getId(), customerList.get(0).getId(), PaymentMethod.CASH, marketService.discount(PaymentMethod.CASH, customerList.get(0).getCustomerCategory(), itineraryList.get(2).getBasicPrice())));
+        for (String ticketString : TICKETS) {
+            try {
+                String words[] = ticketString.split(",");
+                Ticket ticket = new Ticket();
+                ticket.setId(Integer.parseInt(words[0].trim()));
+                ticket.setCustomerId(Integer.parseInt(words[1].trim()));
+                ticket.setItineraryId(Integer.parseInt(words[2].trim()));
+                ticket.setPaymentMethod(PaymentMethod.valueOf(words[3].trim()));
+                ticket.setPaymentAmount(marketService.discount(ticket.getPaymentMethod(), customerRepository.readCustomerCategory(ticket.getCustomerId()), itineraryRepository.readBasicPrice(ticket.getItineraryId())));
+                ticketRepository.create(ticket);
+            } catch (Exception e) {
+                e.getMessage();
+            }
+        }
     }
 
+    /**
+     * Inserts Initial Customers to customer Repo
+     */
     public void insertCustomers() {
-        System.out.println(ticketRepository.read());
         for (String customerString : CUSTOMERS) {
             try {
                 String words[] = customerString.split(",");
@@ -88,6 +122,9 @@ public class DataImport {
 
     }
 
+    /**
+     * Inserts Initial itineraries to itinerary Repo
+     */
     public void insertItineraries() {
         for (String itineraryString : ITINERARIES) {
             try {
@@ -118,10 +155,13 @@ public class DataImport {
 
     }
 
+    /**
+     * Sets the Tickets Purchased and customerSpent fields of Customer
+     */
     public void setCustomerTicketAndPrice() {
         for (Customer customer : customerRepository.read()) {
             customer.setTicketsPurchased(helpers.getInitialTicketsForCustomer(customer.getId(), ticketRepository.read()));
-            customer.setCustomerSpent(helpers.getInitialMneySpentForCustomer(customer.getId(),ticketRepository.read()));
+            customer.setCustomerSpent(helpers.getInitialMneySpentForCustomer(customer.getId(), ticketRepository.read()));
         }
 
     }

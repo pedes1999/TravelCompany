@@ -17,21 +17,21 @@ public class Eshop {
 
     public static void main(String[] args) {
         //Initiating Repos and Service
-        CustomerRepository customerRepo = new CustomerRepositoryImpl();
-        ItineraryRepository itineraryRepo = new ItineraryRepositoryImpl();
-        TicketRepository ticketRepo = new TicketRepositoryImpl();
-        MarketService marketService = new MarketServiceImpl(customerRepo, ticketRepo, itineraryRepo);
-        Helpers helpers = new Helpers(customerRepo, ticketRepo, itineraryRepo, marketService);
+        CustomerRepository customerRepository = new CustomerRepositoryImpl();
+        ItineraryRepository itineraryRepository = new ItineraryRepositoryImpl();
+        TicketRepository ticketRepository = new TicketRepositoryImpl();
+        MarketService marketService = new MarketServiceImpl(customerRepository, ticketRepository, itineraryRepository);
+        Helpers helpers = new Helpers(customerRepository, ticketRepository, itineraryRepository, marketService);
         
         //Data Import
-        DataImport dataImport = new DataImport(customerRepo, ticketRepo, itineraryRepo, marketService,helpers);
+        DataImport dataImport = new DataImport(customerRepository, ticketRepository, itineraryRepository, marketService,helpers);
         dataImport.insertCustomers();
         dataImport.insertItineraries();
-        dataImport.insertTickets(customerRepo.read(), itineraryRepo.read());
+        dataImport.insertTickets(customerRepository.read(), itineraryRepository.read());
         dataImport.setCustomerTicketAndPrice();
+
         //GUI Start
-        GuiImpl gui = new GuiImpl(customerRepo, ticketRepo, itineraryRepo, marketService);
-        
+        GuiImpl gui = new GuiImpl(customerRepository, ticketRepository, itineraryRepository, marketService);
         gui.printGui();
 
     }
