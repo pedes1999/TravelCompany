@@ -40,7 +40,8 @@ public class DataImport {
         "7,Nathan Martin,nmartin@mail.com,Lyon,French,BUSINESS",
         "8,Enzo Collin,ecollin@mail.com,Lyon,French,INDIVIDUAL",
         "9,Frederic Michel, fmichel@mail.com,Athens,French,INDIVIDUAL",
-        "10,Periklis,p@mail.com,Athens,Greek,BUSINESS"
+        "10,Periklis,p@mail.com,Athens,Greek,BUSINESS",
+        "11,Maria,m@mail.com,Athens,Greek,INDIVIDUAL"
 
     };
 
@@ -67,13 +68,8 @@ public class DataImport {
         "8,2,9,CASH",
         "9,1,3,CASH",
         "10,6,8,CREDIT",
-        "11,4,5,CREDIT",
-        "12,4,8,CASH",
-        "13,2,8,CREDIT",
-        "14,2,4,CASH",
-        "15,2,4,CASH",
-        "16,4,4,CASH",
-        "16,4,8,CASH"
+        "10,11,10,CREDIT",
+  
 
     };
 

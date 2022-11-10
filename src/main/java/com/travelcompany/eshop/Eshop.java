@@ -1,8 +1,5 @@
 package com.travelcompany.eshop;
 
-import exceptions.MarketException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import repoImpl.CustomerRepositoryImpl;
 import repoImpl.ItineraryRepositoryImpl;
 import repoImpl.TicketRepositoryImpl;
@@ -28,17 +25,15 @@ public class Eshop {
         MarketService marketService = new MarketServiceImpl(customerRepository, ticketRepository, itineraryRepository);
         Helpers helpers = new Helpers(customerRepository, ticketRepository, itineraryRepository, marketService);
         IoServices ioService = new IoServicesImpl(customerRepository, ticketRepository, itineraryRepository);
-        
         //Data Import
-        DataImport dataImport = new DataImport(customerRepository, ticketRepository, itineraryRepository, marketService,helpers);
+        DataImport dataImport = new DataImport(customerRepository, ticketRepository, itineraryRepository, marketService, helpers);
         dataImport.insertCustomers();
         dataImport.insertItineraries();
         dataImport.insertTickets(customerRepository.read(), itineraryRepository.read());
         dataImport.setCustomerTicketAndPrice();
-        
         //GUI Start
-        GuiImpl gui = new GuiImpl(customerRepository, ticketRepository, itineraryRepository, marketService,ioService);
+        GuiImpl gui = new GuiImpl(customerRepository, ticketRepository, itineraryRepository, marketService, ioService);
         gui.printGui();
-        
+
     }
 }

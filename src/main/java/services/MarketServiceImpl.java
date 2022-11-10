@@ -66,26 +66,32 @@ public class MarketServiceImpl implements MarketService {
     @Override
     public boolean addTicket(Ticket ticket) throws MarketException {
         List<Integer> customerIdList = new ArrayList();
-         List<Integer> itineraryIdList = new ArrayList();
-        for (Customer c : customerRepository.read()){
+        List<Integer> itineraryIdList = new ArrayList();
+        for (Customer c : customerRepository.read()) {
             customerIdList.add(c.getId());
         }
-        
-        for (Itinerary i : itineraryRepository.read()){
+
+        for (Itinerary i : itineraryRepository.read()) {
             itineraryIdList.add(i.getId());
         }
         if (ticket == null) {
             return false;
         }
-        
+
         if (!customerIdList.contains(ticket.getCustomerId())) {
             throw new MarketException(MarketExceptionCodes.CUSTOMER_NOT_FOUND);
         }
 
-       if (!itineraryIdList.contains(ticket.getItineraryId())) {
+        if (!itineraryIdList.contains(ticket.getItineraryId())) {
             throw new MarketException(MarketExceptionCodes.ITINERARY_NOT_FOUND);
-       }
+        }
         ticketRepository.create(ticket);
+        for (Customer c : customerRepository.read()) {            
+            if (ticket.getCustomerId() == c.getId()) {
+                c.setTicketsPurchased(c.getTicketsPurchased() + 1);
+                c.setCustomerSpent(c.getCustomerSpent() + ticket.getPaymentAmount());
+            }
+        }
         return true;
     }
 

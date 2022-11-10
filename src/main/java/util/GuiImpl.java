@@ -113,7 +113,7 @@ public class GuiImpl {
             }
             if (choice.equals(8)) {
                 try {
-                    ioService.saveCustomerToCsv("customers.csv");
+                    ioService.saveCustomerToCsv("data/customers.csv");
                 } catch (MarketException e) {
                     Logger.getLogger(Eshop.class.getName()).log(Level.SEVERE, null, e);
                 }
@@ -123,7 +123,7 @@ public class GuiImpl {
             }
             if (choice.equals(10)) {
                 try {
-                    ioService.saveItineraryToCsv("itineraries.csv");
+                    ioService.saveItineraryToCsv("data/itineraries.csv");
                 } catch (MarketException e) {
                     Logger.getLogger(Eshop.class.getName()).log(Level.SEVERE, null, e);
                 }
@@ -134,7 +134,7 @@ public class GuiImpl {
             }
             if (choice.equals(12)) {
                 try {
-                    ioService.saveTicketToCsv("tickets.csv");
+                    ioService.saveTicketToCsv("data/tickets.csv");
                 } catch (MarketException e) {
                     Logger.getLogger(Eshop.class.getName()).log(Level.SEVERE, null, e);
                 }
