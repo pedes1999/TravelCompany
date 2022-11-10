@@ -51,8 +51,8 @@ public class GuiImpl {
             System.out.println("1 : List of the total number and list of the cost of tickets for all customers");
             System.out.println("2 : List of the total offered itineraries per departure");
             System.out.println("3: List of the total offered itineraries per destination");
-            System.out.println("4: List of the customers with the most tickets ");
-            System.out.println("5: List of the customers with the highest amount paid");
+            System.out.println("4: List of the customers with the most tickets(SORTED BY TICKETS IN DESCENDING ORDER) ");
+            System.out.println("5: List of the customers with the highest amount paid(SORTED BY AMOUNT PAID IN DESCENDING ORDER)");
             System.out.println("6: List of the customers who have not purchased any ticket");
             System.out.printf("-------------------------------------------------------\n");
             System.out.println("ADDITIONAL FUNCTIONALITY");
@@ -338,12 +338,6 @@ public class GuiImpl {
 
         double ticketPrice = marketService.discount(newTicket.getPaymentMethod(), selectedCustomer.getCustomerCategory(), selectedItinerary.getBasicPrice());
         newTicket.setPaymentAmount(ticketPrice);
-
-        double initialCustomerSpent = selectedCustomer.getCustomerSpent();
-        selectedCustomer.setCustomerSpent(initialCustomerSpent + ticketPrice);
-
-        int ticketsPurchased = selectedCustomer.getTicketsPurchased();
-        selectedCustomer.setTicketsPurchased(ticketsPurchased + 1);
 
         return newTicket;
     }

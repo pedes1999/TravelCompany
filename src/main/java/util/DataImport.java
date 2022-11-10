@@ -41,19 +41,20 @@ public class DataImport {
         "8,Enzo Collin,ecollin@mail.com,Lyon,French,INDIVIDUAL",
         "9,Frederic Michel, fmichel@mail.com,Athens,French,INDIVIDUAL",
         "10,Periklis,p@mail.com,Athens,Greek,BUSINESS",
-        "11,Maria,m@mail.com,Athens,Greek,INDIVIDUAL"
+        "11,Maria,m@mail.com,Athens,Greek,INDIVIDUAL",
+        "12,Spyros,s@mail.com,France,Greek,BUSINESS"
 
     };
 
     private final static String[] ITINERARIES = {
-        "1,ATH,PAR,2022/02/22 13:35,Skylines,300",
+        "1,AMS,PAR,2022/02/22 13:35,Skylines,300",
         "2,ATH,LON,2022/02/22 13:40,Skylines,420",
-        "3,ATH,AMS,2022/02/22 13:45,Skylines,280",
-        "4,ATH,PAR,2022/02/22 14:20,Skylines,310",
+        "3,DUB,AMS,2022/02/22 13:45,Skylines,280",
+        "4,LON,PAR,2022/02/22 14:20,Skylines,310",
         "5,ATH,DUB,2022/02/22 14:35,Skylines,880",
-        "6,ATH,FRA,2022/02/22 14:55,Skylines,380",
-        "7,ATH,FRA,2022/02/22 15:35,Skylines,350",
-        "8,ATH,MEX,2022/02/22 16:00,Skylines,1020",
+        "6,MEX,FRA,2022/02/22 14:55,Skylines,380",
+        "7,FRA,LON,2022/02/22 15:35,Skylines,350",
+        "8,FRA,MEX,2022/02/22 16:00,Skylines,1020",
         "9,ATH,DUB,2022/02/22 16:35,Skylines,770",
         "10,DUB,LON,2022/02/22 17:40,Skylines,1000"
     };
@@ -68,8 +69,8 @@ public class DataImport {
         "8,2,9,CASH",
         "9,1,3,CASH",
         "10,6,8,CREDIT",
-        "10,11,10,CREDIT",
-  
+        "11,11,10,CREDIT",
+        "12,12,10,CASH"
 
     };
 
@@ -96,7 +97,7 @@ public class DataImport {
     }
 
     /**
-     * Inserts Initial Customers to customer Repo
+     * Inserts Initial Customers to customer Repository
      */
     public void insertCustomers() {
         for (String customerString : CUSTOMERS) {
@@ -119,7 +120,7 @@ public class DataImport {
     }
 
     /**
-     * Inserts Initial itineraries to itinerary Repo
+     * Inserts Initial itineraries to itinerary Repository
      */
     public void insertItineraries() {
         for (String itineraryString : ITINERARIES) {

@@ -9,4 +9,6 @@ Id,Name,Email,Address,Nationality,Category
 8,Enzo Collin,ecollin@mail.com,Lyon,French,INDIVIDUAL
 9,Frederic Michel,fmichel@mail.com,Athens,French,INDIVIDUAL
 10,Periklis,p@mail.com,Athens,Greek,BUSINESS
-11,Periklis,p@travelcompany.co,Greek,Athens,BUSINESS
+11,Maria,m@mail.com,Athens,Greek,INDIVIDUAL
+12,Spyros,s@mail.com,France,Greek,BUSINESS
+13,Giorgos,g@georg.com,France,French,BUSINESS

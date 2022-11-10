@@ -1,15 +1,11 @@
 package services;
 
-import enums.CustomerCategory;
 import exceptions.MarketException;
 import exceptions.MarketExceptionCodes;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Customer;
 import model.Itinerary;
 import model.Ticket;
@@ -49,7 +45,7 @@ public class IoServicesImpl implements IoServices {
         }
     }
 
-     @Override
+    @Override
     public void saveItineraryToCsv(String filename) throws MarketException {
         File file = new File(filename);
         List<Itinerary> itineraryList = itineraryRepository.read();
@@ -68,7 +64,7 @@ public class IoServicesImpl implements IoServices {
             throw new MarketException(MarketExceptionCodes.ITINERARY_NOT_FOUND);
         }
     }
-    
+
     @Override
     public void saveTicketToCsv(String filename) throws MarketException {
         File file = new File(filename);
@@ -87,9 +83,5 @@ public class IoServicesImpl implements IoServices {
             throw new MarketException(MarketExceptionCodes.TICKET_NOT_FOUND);
         }
     }
-
-   
-
-   
 
 }

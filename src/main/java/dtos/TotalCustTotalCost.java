@@ -1,7 +1,7 @@
-
 package dtos;
 
 public class TotalCustTotalCost {
+
     private int totalCustomers;
     private double totalTicketPrice;
 

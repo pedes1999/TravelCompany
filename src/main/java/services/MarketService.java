@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package services;
-
 
 import dtos.TotalCustTotalCost;
 import enums.AirportCode;
@@ -15,12 +10,8 @@ import model.Customer;
 import model.Itinerary;
 import model.Ticket;
 
-/**
- *
- * @author pnbdr
- */
 public interface MarketService {
-    
+
     /**
      *
      * @param customer
@@ -67,7 +58,7 @@ public interface MarketService {
      * @param airportCode
      * @return list of itineraries based on Departure Code
      */
-    List<Itinerary> searchDeparture(AirportCode airportCode); 
+    List<Itinerary> searchDeparture(AirportCode airportCode);
 
     /**
      *
@@ -88,7 +79,8 @@ public interface MarketService {
      *
      * @param customerList
      * @param ticketList
-     * @return list of customers with descenting order based on their tickets Purchased
+     * @return list of customers with descenting order based on their tickets
+     * Purchased
      */
     List<Customer> searchCustomersWithMostTickets(List<Customer> customerList, List<Ticket> ticketList);
 
@@ -96,10 +88,9 @@ public interface MarketService {
      *
      * @param customerList
      * @param ticketList
-     * @return list of customers with descenting order based on their amount spent
+     * @return list of customers with descenting order based on their amount
+     * spent
      */
-    List<Customer> searchCustomerWithHighestTotalCost(List<Customer> customerList,List<Ticket> ticketList);
-    
-  
-    
+    List<Customer> searchCustomerWithHighestTotalCost(List<Customer> customerList, List<Ticket> ticketList);
+
 }

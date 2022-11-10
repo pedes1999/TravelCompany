@@ -16,6 +16,9 @@ public class Customer extends PersistentClass implements Comparable<Customer> {
 
     }
 
+    /*
+    Overloading Costructors
+     */
     public Customer(int id, String customerName, String customerEmail, String customerAddress, String customerNationality, CustomerCategory customerCategory) {
         setId(id);
         this.customerName = customerName;
