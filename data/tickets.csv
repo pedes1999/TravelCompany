@@ -11,4 +11,3 @@ Id,CustomerId,ItineraryId,PaymentMethod,Payment Amount
 10,6,8,CREDIT,816.0
 11,11,10,CREDIT,1100.0
 12,12,10,CASH,900.0
-13,13,11,CREDIT,1600.0

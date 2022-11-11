@@ -163,6 +163,8 @@ public class GuiImpl {
                     Ticket newTicket = createTicketFromConsole();
                     marketService.addTicket(newTicket);
                     System.out.println("Ticket was Created Successfully!!");
+                } catch (NullPointerException ne) {
+                    System.out.println("There is no such itinerary");
                 } catch (MarketException e) {
                     e.printStackTrace();
                 }
@@ -292,7 +294,6 @@ public class GuiImpl {
     public Ticket createTicketFromConsole() {
         Scanner sc = new Scanner(System.in);
         Ticket newTicket = new Ticket();
-
         System.out.println("Please select the customer's id you want to buy a ticket for : ");
         for (Customer c : customerRepository.read()) {
             System.out.println(c);
@@ -304,6 +305,7 @@ public class GuiImpl {
         } catch (NullPointerException e) {
             e.printStackTrace();
             System.out.println("There is no customer with that id");
+
         }
 
         System.out.println("Please select the itinerary's id you want to buy a ticket for : ");
@@ -314,10 +316,12 @@ public class GuiImpl {
         Itinerary selectedItinerary = itineraryRepository.read(Integer.parseInt(itineraryId));
 
         try {
-            newTicket.setItineraryId(selectedItinerary.getId());;
+            newTicket.setItineraryId(selectedItinerary.getId());
+
         } catch (NullPointerException e) {
             e.printStackTrace();
-            System.out.println("There is no customer with that id");
+            System.out.println("There is no itinerary  with that id");
+
         }
 
         while (true) {
@@ -348,7 +352,7 @@ public class GuiImpl {
      */
     public AirportCode getAirportCode() {
         System.out.println("===============================================");
-        System.out.println("Please Give a number based on your Preference");
+        System.out.println("Please state your itinerary of choice!");
         System.out.println("===============================================");
         Scanner sc = new Scanner(System.in);
 
