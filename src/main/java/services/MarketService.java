@@ -58,14 +58,14 @@ public interface MarketService {
      * @param airportCode
      * @return list of itineraries based on Departure Code
      */
-    List<Itinerary> searchDeparture(AirportCode airportCode);
+    List<Itinerary> searchItineraryPerDeparture(AirportCode airportCode);
 
     /**
      *
      * @param airportCode
      * @return list of itineraries based on Destination Code
      */
-    List<Itinerary> searchDestination(AirportCode airportCode);
+    List<Itinerary> searchItineraryPerDestination(AirportCode airportCode);
 
     /**
      *
@@ -79,7 +79,7 @@ public interface MarketService {
      *
      * @param customerList
      * @param ticketList
-     * @return list of customers with descenting order based on their tickets
+     * @return list of customers with descending order based on their tickets
      * Purchased
      */
     List<Customer> searchCustomersWithMostTickets(List<Customer> customerList, List<Ticket> ticketList);
@@ -88,7 +88,7 @@ public interface MarketService {
      *
      * @param customerList
      * @param ticketList
-     * @return list of customers with descenting order based on their amount
+     * @return list of customers with descending order based on their amount
      * spent
      */
     List<Customer> searchCustomerWithHighestTotalCost(List<Customer> customerList, List<Ticket> ticketList);

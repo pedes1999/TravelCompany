@@ -86,12 +86,12 @@ public class GuiImpl {
             if (choice.equals(2)) {
                 AirportCode airCode = getAirportCode();
 
-                List<Itinerary> departureList = marketService.searchDeparture(airCode);
+                List<Itinerary> departureList = marketService.searchItineraryPerDeparture(airCode);
                 System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(departureList));
             }
             if (choice.equals(3)) {
                 AirportCode airCode = getAirportCode();
-                List<Itinerary> destinationList = marketService.searchDestination(airCode);
+                List<Itinerary> destinationList = marketService.searchItineraryPerDestination(airCode);
                 System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(destinationList));
             }
             if (choice.equals(4)) {

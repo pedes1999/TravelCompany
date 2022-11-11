@@ -136,7 +136,7 @@ public class MarketServiceImpl implements MarketService {
     }
 
     @Override
-    public List<Itinerary> searchDeparture(AirportCode airportCode) {
+    public List<Itinerary> searchItineraryPerDeparture(AirportCode airportCode) {
         List<Itinerary> departureList = new ArrayList<>();
         for (Itinerary itinerary : itineraryRepository.read()) {
             if (itinerary.getItineraryDeparture().equals(airportCode)) {
@@ -147,7 +147,7 @@ public class MarketServiceImpl implements MarketService {
     }
 
     @Override
-    public List<Itinerary> searchDestination(AirportCode airportCode) {
+    public List<Itinerary> searchItineraryPerDestination(AirportCode airportCode) {
         List<Itinerary> destinationList = new ArrayList<>();
         for (Itinerary itinerary : itineraryRepository.read()) {
             if (itinerary.getItineraryDestination().equals(airportCode)) {
