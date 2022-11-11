@@ -2,6 +2,8 @@
 Travel Company Ticketing System
 To run the program,just clone it in your Preferred IDE,click Build,and then Run.
 
+First,please check the data populated in the utils/DataImport file to verify everything is working as it should.
+
 You have the option to Dynamically add Customers,Itineraries,and Tickets and check everything From the GUI should you use choose that,
 or in the util/DataImport.java file you can add values to the tables from there.
 
