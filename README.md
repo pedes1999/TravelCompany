@@ -11,3 +11,4 @@ There is somee added functionality for checking the full updated Collections eve
 an external csv File.
 
 To store the data tha you modified to an external Csv just press the corresponding numbers in the GUI.
+The Csvs will be under the data folder.
