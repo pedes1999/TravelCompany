@@ -7,7 +7,7 @@ public interface IoServices {
     /**
      *
      * @param filename Saves customers to CSV
-     * @throws CustomerException
+     * @throws MarketException
      */
     void saveCustomerToCsv(String filename) throws MarketException;
 
@@ -21,8 +21,8 @@ public interface IoServices {
 
     /**
      * @param filename
-     * @return saves Tickets to CSV
-     * @throws CustomerException
+     * saves Tickets to CSV
+     * @throws MarketException
      */
     void saveTicketToCsv(String filename) throws MarketException;
 

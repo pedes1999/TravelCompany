@@ -70,7 +70,8 @@ public class DataImport {
         "9,1,3,CASH",
         "10,6,8,CREDIT",
         "11,11,10,CREDIT",
-        "12,12,10,CASH"
+        "12,12,10,CASH",
+        "13,2,2,CREDIT"
 
     };
 

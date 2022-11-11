@@ -32,6 +32,12 @@ public class MarketServiceImpl implements MarketService {
         this.itineraryRepository = itineraryRepository;
     }
 
+    /**
+     *
+     * @param customer
+     * @return Creates a new customer to the Customer Repository
+     * @throws MarketException
+     */
     @Override
     public boolean addCustomer(Customer customer) throws MarketException {
 
@@ -46,6 +52,12 @@ public class MarketServiceImpl implements MarketService {
         return true;
     }
 
+    /**
+     *
+     * @param itinerary
+     * @return Creates a new itinerary to the itinerary Repository
+     * @throws MarketException
+     */
     @Override
     public boolean addItinerary(Itinerary itinerary) throws MarketException {
 
@@ -63,6 +75,12 @@ public class MarketServiceImpl implements MarketService {
         return true;
     }
 
+    /**
+     *
+     * @param ticket
+     * @return Creates a new Ticket to the ticket Repository
+     * @throws MarketException
+     */
     @Override
     public boolean addTicket(Ticket ticket) throws MarketException {
         List<Integer> customerIdList = new ArrayList();
@@ -86,7 +104,7 @@ public class MarketServiceImpl implements MarketService {
             throw new MarketException(MarketExceptionCodes.ITINERARY_NOT_FOUND);
         }
         ticketRepository.create(ticket);
-        for (Customer c : customerRepository.read()) {            
+        for (Customer c : customerRepository.read()) {
             if (ticket.getCustomerId() == c.getId()) {
                 c.setTicketsPurchased(c.getTicketsPurchased() + 1);
                 c.setCustomerSpent(c.getCustomerSpent() + ticket.getPaymentAmount());
@@ -95,6 +113,13 @@ public class MarketServiceImpl implements MarketService {
         return true;
     }
 
+    /**
+     *
+     * @param paymentMethod
+     * @param customerCategory
+     * @param initialPrice
+     * @return the Calculated price of a Ticket
+     */
     @Override
     public double discount(PaymentMethod paymentMethod, CustomerCategory customerCategory, double initialPrice) {
         if (customerCategory.equals(CustomerCategory.BUSINESS)) {
@@ -116,6 +141,12 @@ public class MarketServiceImpl implements MarketService {
         return 0;
     }
 
+    /**
+     *
+     * @param customerList
+     * @param ticketList
+     * @return the number of Customers and their total amount spent
+     */
     @Override
     public List<TotalCustTotalCost> searchCustomerNumAndTotalCost(List<Customer> customerList, List<Ticket> ticketList) {
         List<TotalCustTotalCost> totalList = new ArrayList<>();
@@ -135,6 +166,11 @@ public class MarketServiceImpl implements MarketService {
         return totalList;
     }
 
+    /**
+     *
+     * @param airportCode
+     * @return list of itineraries based on Departure Code
+     */
     @Override
     public List<Itinerary> searchItineraryPerDeparture(AirportCode airportCode) {
         List<Itinerary> departureList = new ArrayList<>();
@@ -146,6 +182,11 @@ public class MarketServiceImpl implements MarketService {
         return departureList;
     }
 
+    /**
+     *
+     * @param airportCode
+     * @return list of itineraries based on Destination Code
+     */
     @Override
     public List<Itinerary> searchItineraryPerDestination(AirportCode airportCode) {
         List<Itinerary> destinationList = new ArrayList<>();
@@ -157,6 +198,12 @@ public class MarketServiceImpl implements MarketService {
         return destinationList;
     }
 
+    /**
+     *
+     * @param customerList
+     * @param ticketList
+     * @return list of customers who haven't bought any tickets
+     */
     @Override
     public List<Customer> SearchCustomersNotPurchased(List<Customer> customerList, List<Ticket> ticketList) {
         List<Customer> customerHasBoughtTicket = new ArrayList<>();
@@ -174,6 +221,13 @@ public class MarketServiceImpl implements MarketService {
         return customerNotBought;
     }
 
+    /**
+     *
+     * @param customerList
+     * @param ticketList
+     * @return list of customers with descending order based on their tickets
+     * Purchased
+     */
     @Override
     public List<Customer> searchCustomersWithMostTickets(List<Customer> customerList, List<Ticket> ticketList) {
         Set<Customer> setWithMostTickets = new HashSet<>();
@@ -189,6 +243,13 @@ public class MarketServiceImpl implements MarketService {
         return customersWithMostTickets;
     }
 
+    /**
+     *
+     * @param customerList
+     * @param ticketList
+     * @return list of customers with descending order based on their amount
+     * spent
+     */
     @Override
     public List<Customer> searchCustomerWithHighestTotalCost(List<Customer> customerList, List<Ticket> ticketList) {
         Set<Customer> setWithHighestCost = new HashSet<>();

@@ -6,10 +6,10 @@ public interface TicketRepository extends Repository<Ticket> {
 
     /**
      *
-     * @param TicketId
+     * @param ticketId
      * @param price
      * updates a ticket's price based on id
      */
-    void update(int TicketId, double price);
+    void update(int ticketId, double price);
 
 }

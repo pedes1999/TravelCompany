@@ -25,6 +25,11 @@ public class IoServicesImpl implements IoServices {
         this.itineraryRepository = itineraryRepository;
     }
 
+    /**
+     *
+     * @param filename Saves customers to CSV
+     * @throws MarketException
+     */
     @Override
     public void saveCustomerToCsv(String filename) throws MarketException {
         File file = new File(filename);
@@ -45,6 +50,12 @@ public class IoServicesImpl implements IoServices {
         }
     }
 
+    /**
+     * saves itineraries to CSV
+     *
+     * @param filename
+     * @throws MarketException
+     */
     @Override
     public void saveItineraryToCsv(String filename) throws MarketException {
         File file = new File(filename);
@@ -65,6 +76,10 @@ public class IoServicesImpl implements IoServices {
         }
     }
 
+    /**
+     * @param filename saves Tickets to CSV
+     * @throws MarketException
+     */
     @Override
     public void saveTicketToCsv(String filename) throws MarketException {
         File file = new File(filename);

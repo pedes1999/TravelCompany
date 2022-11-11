@@ -5,9 +5,16 @@ import repository.TicketRepository;
 
 public class TicketRepositoryImpl extends RepositoryImpl<Ticket> implements TicketRepository {
 
+    
+    /**
+     *
+     * @param ticketId
+     * @param price
+     * updates a ticket's price based on id
+     */
     @Override
-    public void update(int productId, double price) {
-        Ticket ticket = read(productId);
+    public void update(int ticketId, double price) {
+        Ticket ticket = read(ticketId);
         if (ticket != null) {
             ticket.setPaymentAmount(price);
         }

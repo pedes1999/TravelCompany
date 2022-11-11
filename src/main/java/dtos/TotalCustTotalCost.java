@@ -1,5 +1,9 @@
 package dtos;
 
+/**
+ *
+ * Total Customers and their total amount Spent
+ */
 public class TotalCustTotalCost {
 
     private int totalCustomers;

@@ -1,5 +1,9 @@
 package exceptions;
 
+/**
+ *
+ * Setting Exception Codes
+ */
 public class MarketExceptionCodes {
 
     public final static String CUSTOMER_NOT_FOUND = "The customer does not exist";

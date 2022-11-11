@@ -3,6 +3,10 @@ package comparators;
 import java.util.Comparator;
 import model.Customer;
 
+/**
+ *
+ * Compares customers based on the Tickets Purchased
+ */
 public class CustomerTicketComparator implements Comparator<Customer> {
 
     @Override
